@@ -1,0 +1,81 @@
+@use '../components/layout.module.scss' as l;
+
+.hero_inner {
+  background-color: rgba($color: l.$white, $alpha: 0.8);
+  padding: 4rem 2rem;
+  padding-bottom: 0rem;
+  max-width: 800px;
+  margin: 0 auto;
+  @include l.border-radius(l.$block-b-r);
+  position: relative;
+  #watch_video {
+    position: absolute;
+    top: -23px;
+    @include l.center-abs-el;
+    background-color: l.$red;
+    color: l.$white;
+    @include l.border-radius(l.$btn-b-r);
+    padding: 0.3rem 0.6rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+  .contact_box_wrapper {
+    padding-bottom: 1rem;
+    .box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .contact_button {
+        text-align: center;
+        background-color: l.$antra;
+        color: l.$white;
+        font-weight: 600;
+        width: fit-content;
+        padding: 0.3rem 0.6rem;
+        margin-top: -10px;
+        z-index: 1;
+        @include l.border-radius(l.$btn-b-r);
+      }
+    }
+  }
+  .hero_slogan {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    margin: 0;
+    text-align: center;
+    color: l.$black;
+    font-size: 36px;
+  }
+}
+
+.usp {
+  padding: 2rem 0;
+  color: l.$white;
+  display: flex;
+  .icon {
+    margin-right: 1rem;
+  }
+  .content_wrapper {
+    max-width: 400px;
+    padding-right: 2rem;
+    .title {
+      font-size: 32px;
+      font-family: l.$headings;
+      margin-bottom: 1rem;
+    }
+    .description {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+  }
+  &:first-of-type {
+    box-shadow: inset -21px 0 20px -5px rgba(0, 0, 0, 0.1);
+    justify-content: flex-end;
+  }
+  &:last-of-type {
+    box-shadow: inset 21px 0 20px -5px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    padding-left: 2rem;
+  }
+}

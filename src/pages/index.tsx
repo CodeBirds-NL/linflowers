@@ -21,13 +21,54 @@ export const query = graphql`
       acf {
         hero {
           cta
-          title
+          cta_icon {
+            alt_text
+            localFile {
+              childImageSharp {
+                fixed(width: 36) {
+                  ...GatsbyImageSharpFixed_withWebp
+                }
+              }
+            }
+          }
           persons {
             name
             image {
               alt_text
+              localFile {
+                childImageSharp {
+                  fixed(width: 86) {
+                    ...GatsbyImageSharpFixed_withWebp
+                  }
+                }
+              }
             }
           }
+          title
+          background_image {
+            alt_text
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 1200) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+        }
+        usps {
+          icon {
+            alt_text
+            localFile {
+              childImageSharp {
+                fixed(width: 73) {
+                  ...GatsbyImageSharpFixed_withWebp
+                }
+              }
+            }
+          }
+          title
+          description
         }
       }
     }
