@@ -1,3 +1,13 @@
+const generateFavicons = sizes => {
+  return sizes.map(size => {
+    return {
+      src: `favicons/icon-${size}x${size}.png`,
+      sizes: `${size}x${size}`,
+      type: "image/png",
+    }
+  })
+}
+
 const dropUnusedMediaNormalizer = {
   name: "dropUnusedMediaNormalizer",
   normalizer: function ({ entities }) {
@@ -23,18 +33,26 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "fonts",
+        path: `${__dirname}/src/fonts/`,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Linflowers`,
+        short_name: `linflowers`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#f9f4f0`,
+        theme_color: `#ac423d`,
         display: `minimal-ui`,
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
+        icons: generateFavicons([48, 72, 96, 144, 192, 256, 384, 512]),
       },
     },
     {
