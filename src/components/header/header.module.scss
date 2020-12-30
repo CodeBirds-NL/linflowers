@@ -1,13 +1,21 @@
 @use '../layout.module.scss' as l;
 
+.topbar_row {
+  background-image: url("./../../images/header_wave.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: l.$su * 4;
+}
+
 .topbar {
   height: 100%;
   .contactInfo {
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: 15px;
     .tel {
-      margin-right: 2rem;
+      margin-right: 2 * l.$su;
     }
     .tel,
     .email {
@@ -15,7 +23,7 @@
       align-items: center;
       span {
         display: inline-block;
-        padding-left: 1rem;
+        padding-left: l.$su * 0.5;
         color: l.$white;
       }
     }

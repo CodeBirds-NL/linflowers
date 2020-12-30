@@ -8,7 +8,7 @@ import h from "./header.module.scss"
 const TopBar = ({ data }) => {
   const { tel_icon, tel, email_icon, email } = data
   return (
-    <Row height="50px" backgroundColor="#ac423d">
+    <Row customClass={h.topbar_row}>
       <div className={[h.topbar].join(" ")}>
         <div className={h.contactInfo}>
           <a href={`mailto:${email}`} className={h.tel}>

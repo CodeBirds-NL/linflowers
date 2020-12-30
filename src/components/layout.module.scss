@@ -12,6 +12,9 @@ $gray: #9daab0;
 $white: #f9f4f0;
 $black: #383838;
 
+/* Sizing unit */
+$su: 20px;
+
 @mixin border-radius($pixel) {
   border-radius: $pixel;
   -webkit-border-radius: $pixel;
@@ -29,6 +32,12 @@ $black: #383838;
   -o-transform: translateX(-50%);
 }
 
+@mixin grid($cols, $gap: 0) {
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+  gap: $gap;
+}
+
 body {
   font-size: 18px;
   overflow-x: hidden;
@@ -41,7 +50,10 @@ body {
 
 .wrapper {
   padding: 0 40px;
-  height: 100%;
+  min-height: inherit;
+  /* added to center inner hero block */
+  display: flex;
+  align-items: center;
 }
 
 .container {
@@ -67,6 +79,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+// Creates an overlay over the row background image
+.overlay {
+  z-index: 1;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: $black, $alpha: 0.8);
+    z-index: -1;
+  }
 }
 
 // iphone 5 styles

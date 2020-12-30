@@ -1,11 +1,21 @@
 @use '../components/layout.module.scss' as l;
 
+$heroMaxWidth: 900px;
+$actionCircleWidth: 120px;
+$iconWidth: 100px;
+
+/* ----------------------
+1. HERO 
+---------------------- */
+.hero {
+  min-height: calc(100vh - 236.5px);
+}
+
 .hero_inner {
   background-color: rgba($color: l.$white, $alpha: 0.8);
-  padding: 4rem 2rem;
-  padding-bottom: 0rem;
-  max-width: 800px;
-  margin: 0 auto;
+  padding: 3 * l.$su 0;
+  max-width: $heroMaxWidth;
+  margin: auto;
   @include l.border-radius(l.$block-b-r);
   position: relative;
   #watch_video {
@@ -20,62 +30,172 @@
     display: flex;
     align-items: center;
   }
-  .contact_box_wrapper {
-    padding-bottom: 1rem;
-    .box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .contact_button {
-        text-align: center;
-        background-color: l.$antra;
-        color: l.$white;
-        font-weight: 600;
-        width: fit-content;
-        padding: 0.3rem 0.6rem;
-        margin-top: -10px;
-        z-index: 1;
-        @include l.border-radius(l.$btn-b-r);
+  // div containing all actions
+  & > div {
+    @include l.grid(3);
+  }
+
+  .action {
+    text-align: center;
+    color: l.$red;
+    font-weight: 600;
+    .imageWrapper {
+      margin: auto;
+      width: $actionCircleWidth;
+      height: $actionCircleWidth;
+      .circle {
+        border: 3px solid l.$red;
+        height: 100%;
+        display: grid;
+        @include l.border-radius(50%);
+      }
+      .image {
+        width: 50%;
+        margin: auto;
       }
     }
   }
-  .hero_slogan {
-    padding-top: 1rem;
-    padding-bottom: 2rem;
-    margin: 0;
-    text-align: center;
-    color: l.$black;
-    font-size: 36px;
+}
+
+/* ----------------------
+2. PERSONS (under hero) 
+---------------------- */
+
+.persons {
+  @include l.grid(3);
+  max-width: $heroMaxWidth;
+  margin: auto;
+  margin-top: -42px;
+  .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .imageWrapper {
+      border: 6px solid l.$white;
+      @include l.border-radius(50%);
+    }
+    .contact_button {
+      text-align: center;
+      background-color: l.$antra;
+      color: l.$white;
+      font-weight: 600;
+      width: fit-content;
+      padding: 0.3rem 0.6rem;
+      margin-top: -15px;
+      z-index: 1;
+      @include l.border-radius(l.$btn-b-r);
+    }
   }
 }
 
-.usp {
-  padding: 2rem 0;
-  color: l.$white;
+.about {
+  margin: l.$su * 2 0;
+  text-align: center;
+  .text {
+    margin: auto;
+    font-size: 20px;
+    max-width: 600px;
+  }
+  a {
+    color: l.$red;
+    font-weight: 400;
+    font-size: 18px;
+  }
+}
+
+/* ----------------------
+3. PRINCIPLES (usps) 
+---------------------- */
+.usps_wrapper {
+  padding: l.$su * 5 0;
+  // Makes sure that content of row lays on top of overlay
+  z-index: 1;
+
+  position: relative;
+  & > div {
+    max-width: 900px;
+    margin: auto;
+  }
+}
+
+.slides {
+  position: relative;
   display: flex;
-  .icon {
-    margin-right: 1rem;
-  }
-  .content_wrapper {
-    max-width: 400px;
-    padding-right: 2rem;
-    .title {
-      font-size: 32px;
-      font-family: l.$headings;
-      margin-bottom: 1rem;
+  overflow-x: hidden;
+  width: 100%;
+  li {
+    color: l.$white;
+    font-size: 18px;
+    a {
+      color: l.$red;
+      font-weight: 600;
+      font-size: 20px;
     }
-    .description {
-      font-size: 16px;
-      margin-bottom: 0;
+    p {
+      max-width: 550px;
     }
   }
-  &:first-of-type {
-    box-shadow: inset -21px 0 20px -5px rgba(0, 0, 0, 0.1);
-    justify-content: flex-end;
+}
+
+/* ----------------------
+3. PIJLERS/ICONS
+---------------------- */
+
+.icons_wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  .icons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: l.$su;
+    margin-top: -2.5 * l.$su;
+    background-color: l.$white;
+    z-index: 1;
+
+    /* ICON styles */
+    .icon {
+      text-align: center;
+      cursor: pointer;
+
+      .imageWrapper {
+        max-width: $iconWidth;
+        margin: auto;
+      }
+      .text {
+        color: l.$red;
+        font-weight: 600;
+        font-size: 20px;
+      }
+
+      &.active {
+        transform: none;
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        opacity: 1;
+      }
+      /* Inactive styles */
+      transform: scale(0.7);
+      -webkit-transform: scale(0.7);
+      -moz-transform: scale(0.7);
+      -ms-transform: scale(0.7);
+      -o-transform: scale(0.7);
+      transform-origin: center center;
+      opacity: 0.6;
+
+      /* Avoid text shifting during transition */
+      -webkit-font-smoothing: antialised;
+      backface-visibility: hidden;
+
+      transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+      -webkit-transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+      -moz-transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+      -ms-transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+      -o-transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    }
   }
-  &:last-of-type {
-    box-shadow: inset 21px 0 20px -5px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    padding-left: 2rem;
-  }
+
+  /* Add some whitespace between start footer and this section */
+  padding-bottom: l.$su * 3;
 }

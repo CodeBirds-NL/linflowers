@@ -12,6 +12,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header/header"
 import "./layout.css"
 import l from "./layout.module.scss"
+import Footer from "./footer/footer"
 
 const Layout = ({ children, langCode }) => {
   const data = useStaticQuery(graphql`
@@ -67,6 +68,19 @@ const Layout = ({ children, langCode }) => {
                 }
               }
             }
+            footer {
+              col_2 {
+                title
+                wordpress_fields {
+                  left
+                  right
+                }
+              }
+              col_3 {
+                title
+                contact_details
+              }
+            }
           }
         }
       }
@@ -81,6 +95,12 @@ const Layout = ({ children, langCode }) => {
         metaData={data.wordpressPage.acf.header_footer}
       />
       <main className={l.main}>{children}</main>
+      <Footer
+        langCode={langCode}
+        menuItems={data.allWordpressMenusMenusItems.edges}
+        data={{ ...data.wordpressPage.acf.header_footer.footer }}
+        logo={data.wordpressPage.acf.header_footer.site_logo}
+      />
     </>
   )
 }

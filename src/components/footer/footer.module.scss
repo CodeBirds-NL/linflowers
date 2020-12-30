@@ -1,0 +1,78 @@
+@use './../layout.module.scss' as l;
+
+.footer {
+  background-image: url("./../../images/footer_wave.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: l.$white;
+}
+
+.footer_inner {
+  display: grid;
+  grid-template-columns: 2.1fr 1fr 0.9fr;
+  .col_1 {
+    padding-left: 18%;
+    .imageWrapper {
+      width: 70%;
+      margin-top: -30px;
+      margin-bottom: 50px;
+    }
+    .menu {
+      display: flex;
+      flex-direction: row;
+      color: l.$white;
+      font-size: 18px;
+      font-weight: 600;
+      li {
+        margin-right: l.$su * 0.5;
+        padding-right: l.$su * 0.5;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 3px;
+          background-color: l.$white;
+          height: 100%;
+        }
+
+        /* Last menu item shouldn't have a stick to it's right :-) */
+        &:last-of-type::after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .col_title {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: l.$su * 0.5;
+  }
+  .col_2,
+  .col_3 {
+    padding: 40px 0 10px 0;
+    color: l.$white;
+  }
+
+  .col_2 {
+    .fields li {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      line-height: 1.5em;
+      margin-bottom: 0;
+    }
+  }
+
+  .col_3 {
+    .contact {
+      p {
+        line-height: 1.5em;
+      }
+      a {
+        color: l.$white;
+      }
+    }
+  }
+}

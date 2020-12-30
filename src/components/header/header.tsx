@@ -11,9 +11,10 @@ import h from "./header.module.scss"
 const Header = ({ langCode, metaData, menuItems }) => {
   // select right (language-specific) menu from query by comparing lang code present in menu name (FORM: Main Menu XX, where XX is the lanugage code) to lang code passed in props
   let selectedMenu = menuItems.filter(
-    (i: { node: { name: string } }) =>
-      langCode === i.node.name.toLowerCase().split(" ")[2]
-  )[0].node
+    (i: { node: { name: string } }) => {
+      const splittedMenuName = i.node.name.toLowerCase().split(' ')
+      return langCode === splittedMenuName[2] && 'main' === splittedMenuName[0]
+    })[0].node
 
   return (
     <header className={h.header}>
