@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { graphql, Link } from "gatsby"
 import { useKeenSlider } from "keen-slider/react"
 import Img from "gatsby-image"
@@ -6,7 +6,9 @@ import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Row from "../components/row"
+import Arrow from "../components/slider/Arrow"
 // import Spacer from "../components/spacer"
+import useKeyPress from "../components/utils/hooks/useKeyPress"
 
 import i from "./index.module.scss"
 import l from "../components/layout.module.scss"
@@ -14,7 +16,6 @@ import "keen-slider/keen-slider.min.css"
 
 const IndexTemplate = ({ data }) => {
   const { title, lang_code, acf } = data.wordpressPage
-  // console.log(acf.home.usps)
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [sliderRef, slider] = useKeenSlider({
@@ -24,6 +25,17 @@ const IndexTemplate = ({ data }) => {
       setCurrentSlide(s.details().relativeSlide)
     },
   })
+
+  const right = useKeyPress(39)
+  const left = useKeyPress(37)
+
+  useEffect(() => {
+    if (slider && left) slider.prev()
+  }, [left])
+
+  useEffect(() => {
+    if (slider && right) slider.next()
+  }, [right])
 
   return (
     <Layout langCode={lang_code}>
@@ -78,7 +90,7 @@ const IndexTemplate = ({ data }) => {
       </Row>
       <Row customClass={l.overlay} backgroundImage={acf.home.usps_bg}>
         <div className={i.usps_wrapper}>
-          <div>
+          <div className={i.sliderContainer}>
             <ul ref={sliderRef} className={i.slides}>
               {acf.home.usps.map((slide, i) => (
                 <li
@@ -91,6 +103,8 @@ const IndexTemplate = ({ data }) => {
                 </li>
               ))}
             </ul>
+            <Arrow clickHandler={() => slider.prev()} />
+            <Arrow direction="right" clickHandler={() => slider.next()} />
           </div>
         </div>
       </Row>
@@ -100,11 +114,14 @@ const IndexTemplate = ({ data }) => {
           <div className={i.icons}>
             {acf.home.usps.map((slide, index) => (
               <div
+                role="button"
+                onKeyPress={() => slider.moveToSlideRelative(index)}
                 onClick={() => slider.moveToSlideRelative(index)}
                 key={slide.icon_title}
-                className={[i.icon, currentSlide == index ? i.active : ""].join(
-                  " "
-                )}
+                className={[
+                  i.icon,
+                  currentSlide === index ? i.active : "",
+                ].join(" ")}
               >
                 <Img
                   className={i.imageWrapper}

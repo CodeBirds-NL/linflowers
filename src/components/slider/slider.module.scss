@@ -1,0 +1,14 @@
+@use './../layout.module.scss' as l;
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  left: -30px;
+  cursor: pointer;
+  &.right {
+    left: auto;
+    right: -30px;
+  }
+}

@@ -51,8 +51,8 @@ module.exports = {
         background_color: `#f9f4f0`,
         theme_color: `#ac423d`,
         display: `minimal-ui`,
-        // icon: `src/images/favicon.png`, // This path is relative to the root of the site.
-        // icons: generateFavicons([48, 72, 96, 144, 192, 256, 384, 512]),
+        icon: `src/images/favicon.png`, // This path is relative to the root of the site.
+        icons: generateFavicons([48, 72, 96, 144, 192, 256, 384, 512]),
       },
     },
     {
