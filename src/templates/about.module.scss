@@ -22,3 +22,19 @@ h4 {
   padding: l.$su * 2 0 l.$su 0;
   margin-bottom: 0;
 }
+
+.usps {
+  margin: l.$su * 2 0;
+}
+.usp {
+  .image {
+    width: 150px;
+    float: left;
+    margin-right: l.$su * 2;
+  }
+  .quote {
+    font-style: italic;
+    color: l.$antra;
+    margin-bottom: l.$su;
+  }
+}

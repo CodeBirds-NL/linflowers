@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 export const Person = graphql`
   fragment Person on wordpress__wp_media {
     alt_text
+    id
     localFile {
       childImageSharp {
         fixed(width: 86) {

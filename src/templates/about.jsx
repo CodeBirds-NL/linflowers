@@ -28,14 +28,19 @@ const AboutTemplate = ({ pageContext, data }) => {
       <Persons persons={persons} customClass={a.persons} label={false} />
       <div className={a.usps}>
         {usps.map(i => (
-          <div className={a.usp}>
-            <Img fluid={i.icon.localFile.childImageSharp.fluid} />
-            <h4>{i.titel}</h4>
-            <p className={a.quoate}>{i.quote}</p>
-            <div
-              dangerouslySetInnerHTML={{ __html: i.text }}
-              className={a.text}
+          <div key={i.titel} className={a.usp}>
+            <Img
+              className={a.image}
+              fluid={i.icon.localFile.childImageSharp.fluid}
             />
+            <div className={a.content}>
+              <h4>{i.titel}</h4>
+              <p className={a.quote}>{i.quote}</p>
+              <div
+                dangerouslySetInnerHTML={{ __html: i.text }}
+                className={a.text}
+              />
+            </div>
           </div>
         ))}
       </div>

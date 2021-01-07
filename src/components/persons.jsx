@@ -8,7 +8,7 @@ const Persons = ({ persons, customClass = "", label = true }) => {
   return (
     <div className={[p.persons, customClass].join(" ")}>
       {persons.map(({ title, url, image }) => (
-        <Link to={url} key={url} className={p.box}>
+        <Link to={url} key={image.id} className={p.box}>
           <div className={p.imageWrapper}>
             {image && <Img fixed={image.localFile.childImageSharp.fixed} />}
           </div>
