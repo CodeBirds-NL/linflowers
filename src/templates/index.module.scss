@@ -1,6 +1,6 @@
-@use '../components/layout.module.scss' as l;
+@use '../components/layout/layout.module.scss' as l;
 
-$heroMaxWidth: 900px;
+$heroMaxWidth: l.$heroMaxWidth;
 $actionCircleWidth: 120px;
 $iconWidth: 100px;
 
@@ -62,30 +62,8 @@ $iconWidth: 100px;
 ---------------------- */
 
 .persons {
-  @include l.grid(3);
-  max-width: $heroMaxWidth;
   margin: auto;
   margin-top: -42px;
-  .box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .imageWrapper {
-      border: 6px solid l.$white;
-      @include l.border-radius(50%);
-    }
-    .contact_button {
-      text-align: center;
-      background-color: l.$antra;
-      color: l.$white;
-      font-weight: 600;
-      width: fit-content;
-      padding: 0.3rem 0.6rem;
-      margin-top: -15px;
-      z-index: 1;
-      @include l.border-radius(l.$btn-b-r);
-    }
-  }
 }
 
 .about {

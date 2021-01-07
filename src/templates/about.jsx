@@ -1,21 +1,87 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql, Link } from "gatsby"
+import Img from "gatsby-image"
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import PageDefaultLayout from "../components/layout/PageDefaultLayout"
+import Button from "../components/button"
+import Row from "../components/row"
 
-const IndexTemplate = ({ pageContext }) => {
-  const { title, lang_code, acf } = pageContext
+import a from "./about.module.scss"
+import Persons from "../components/persons"
+
+const AboutTemplate = ({ pageContext, data }) => {
+  const {
+    title,
+    image,
+    text,
+    btn,
+    persons_title,
+    persons,
+    usps,
+  } = data.wordpressPage.acf.about
+
   return (
-    <Layout langCode={lang_code}>
-      <SEO title={title} />
-      <h1>{title}</h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <p>Now go build something great.</p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-    </Layout>
+    <PageDefaultLayout data={{ ...pageContext, title, image }}>
+      <div className={a.text} dangerouslySetInnerHTML={{ __html: text }} />
+      <Button data={btn} />
+      <h4 className={a.persons__title}>{persons_title}</h4>
+      <Persons persons={persons} customClass={a.persons} label={false} />
+      <div className={a.usps}>
+        {usps.map(i => (
+          <div className={a.usp}>
+            <Img fluid={i.icon.localFile.childImageSharp.fluid} />
+            <h4>{i.titel}</h4>
+            <p className={a.quoate}>{i.quote}</p>
+            <div
+              dangerouslySetInnerHTML={{ __html: i.text }}
+              className={a.text}
+            />
+          </div>
+        ))}
+      </div>
+    </PageDefaultLayout>
   )
 }
 
-export default IndexTemplate
+export default AboutTemplate
+
+/**
+ * Asynchronously gets page data based on wordpress_id (passed from gatsby-node.js)
+ * @param {Number} $wordpress_id - Id of the page
+ * @returns {Object} data in format we queried it
+ */
+
+export const data = graphql`
+  query AboutPageQuery($wordpress_id: Int) {
+    wordpressPage(wordpress_id: { eq: $wordpress_id }) {
+      acf {
+        about {
+          title
+          text
+          image {
+            ...Background
+          }
+          btn {
+            label
+            link
+          }
+          persons_title
+          persons {
+            url
+            image {
+              ...Person
+            }
+          }
+          usps {
+            text
+            titel
+            quote
+            icon {
+              ...Pijler
+            }
+          }
+        }
+      }
+    }
+  }
+`

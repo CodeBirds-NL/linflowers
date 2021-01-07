@@ -1,0 +1,21 @@
+@use './layout.module.scss' as l;
+
+.hero {
+  min-height: 50vh;
+}
+
+.contentWrapper {
+  margin: auto;
+  max-width: 900px;
+  background-color: l.$white;
+  padding: l.$su l.$su * 4;
+  margin-top: -100px;
+  margin-bottom: 100px;
+  h1 {
+    color: l.$red;
+    font-family: l.$body;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 48px;
+  }
+}

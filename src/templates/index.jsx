@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby"
 import { useKeenSlider } from "keen-slider/react"
 import Img from "gatsby-image"
 
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 import Row from "../components/row"
 import Arrow from "../components/slider/Arrow"
@@ -11,8 +11,9 @@ import Arrow from "../components/slider/Arrow"
 import useKeyPress from "../components/utils/hooks/useKeyPress"
 
 import i from "./index.module.scss"
-import l from "../components/layout.module.scss"
+import l from "../components/layout/layout.module.scss"
 import "keen-slider/keen-slider.min.css"
+import Persons from "../components/persons"
 
 const IndexTemplate = ({ data }) => {
   const { title, lang_code, acf } = data.wordpressPage
@@ -70,7 +71,8 @@ const IndexTemplate = ({ data }) => {
         </div>
       </Row>
       <Row backgroundColor="#f9f4f0">
-        <div className={i.persons}>
+        <Persons persons={acf.home.about.persons} customClass={i.persons} />
+        {/* <div className={i.persons}>
           {acf.home.about.persons.map(({ title, url, image }) => (
             <Link to={url} key={title} className={i.box}>
               <div className={i.imageWrapper}>
@@ -79,7 +81,7 @@ const IndexTemplate = ({ data }) => {
               <button className={i.contact_button}>{title}</button>
             </Link>
           ))}
-        </div>
+        </div> */}
         <div className={i.about}>
           <div
             className={i.text}
@@ -155,14 +157,7 @@ export const data = graphql`
         home {
           hero {
             background_image {
-              alt_text
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 1200) {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
-              }
+              ...Background
             }
             actions {
               title
@@ -195,14 +190,7 @@ export const data = graphql`
               title
               url
               image {
-                alt_text
-                localFile {
-                  childImageSharp {
-                    fixed(width: 86) {
-                      ...GatsbyImageSharpFixed_withWebp
-                    }
-                  }
-                }
+                ...Person
               }
             }
             text
@@ -220,25 +208,11 @@ export const data = graphql`
             }
             icon_title
             icon {
-              alt_text
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 150) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
-              }
+              ...Pijler
             }
           }
           usps_bg {
-            alt_text
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 1920) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
+            ...Background
           }
         }
       }

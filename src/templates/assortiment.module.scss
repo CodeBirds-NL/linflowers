@@ -1,0 +1,41 @@
+@use './../components/layout/layout.module.scss' as l;
+
+.hero {
+  min-height: 50vh;
+}
+
+.contentWrapper {
+  margin: auto;
+  max-width: 900px;
+  background-color: l.$white;
+  padding: l.$su l.$su * 4;
+  margin-top: -100px;
+  margin-bottom: 100px;
+  h1 {
+    color: l.$red;
+    font-family: l.$body;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 48px;
+  }
+}
+
+.products {
+  @include l.grid(3);
+  & > a:nth-child(3n + 2) {
+    margin-top: 40%;
+    margin-bottom: -40%;
+  }
+  img {
+    margin-bottom: 0;
+  }
+  .product {
+    text-align: center;
+    .caption {
+      font-size: l.$su;
+      text-transform: uppercase;
+      color: l.$antra;
+      font-weight: 400;
+    }
+  }
+}

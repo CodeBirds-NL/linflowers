@@ -1,8 +1,8 @@
 import React from "react"
 import Img from "gatsby-image"
 
-import "./layout.css"
-import l from "./layout.module.scss"
+import "./layout/layout.css"
+import l from "./layout/layout.module.scss"
 
 const Row = ({
   backgroundImage = "",

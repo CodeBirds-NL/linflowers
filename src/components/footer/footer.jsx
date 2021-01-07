@@ -24,11 +24,11 @@ const Footer = ({ data, menuItems, langCode, logo }) => {
             fluid={logo.localFile.childImageSharp.fluid}
           />
           <ul className={f.menu}>
-            {selectedMenu.items.map(({ slug, title }) => (
-              <li key={slug}>
+            {selectedMenu.items.map(({ url, title }) => (
+              <li key={title}>
                 <Link
-                  to={`${langCode === "nl" ? "" : `/${langCode}`}/${
-                    slug === null ? "" : slug
+                  to={`${langCode === "nl" ? "" : `/${langCode}`}${
+                    url === "/nl/" || url === null ? "/" : url
                   }`}
                 >
                   {title}

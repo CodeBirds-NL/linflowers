@@ -37,7 +37,42 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  const allQueryResults = [indexResult, aboutResult]
+  const assortimentResult = await graphql(`
+    {
+      allWordpressPage(filter: { template: { eq: "assortiment.php" } }) {
+        edges {
+          node {
+            wordpress_id
+            title
+            slug
+            lang_code
+            template
+            featured_media {
+              alt_text
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 1500) {
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                  }
+                }
+              }
+            }
+            acf {
+              products_archive {
+                title
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const allQueryResults = [indexResult, aboutResult, assortimentResult]
 
   // Check for any errors
   allQueryResults.forEach(i => {

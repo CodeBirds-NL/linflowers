@@ -14,6 +14,7 @@ $black: #383838;
 
 /* Sizing unit */
 $su: 20px;
+$heroMaxWidth: 900px;
 
 @mixin border-radius($pixel) {
   border-radius: $pixel;
@@ -93,6 +94,23 @@ body {
     height: 100%;
     background-color: rgba($color: $black, $alpha: 0.8);
     z-index: -1;
+  }
+}
+
+/* -------------
+  Button
+  -------------- */
+.btn {
+  padding: 12px 22px;
+  font-size: 20px;
+  font-weight: 600;
+  z-index: 1;
+  width: fit-content;
+  display: block;
+  @include border-radius($btn-b-r);
+  &.red {
+    background-color: $red;
+    color: $white;
   }
 }
 

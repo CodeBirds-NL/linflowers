@@ -21,17 +21,17 @@ const Header = ({ langCode, metaData, menuItems }) => {
       <TopBar data={metaData.topbar} />
       <Row>
         <div className={h.siteLogo}>
-          <Img fluid={metaData.site_logo.localFile.childImageSharp.fluid} />
+          <Link to='/'><Img fluid={metaData.site_logo.localFile.childImageSharp.fluid} /></Link>
         </div>
       </Row>
       <Row>
         <nav className={h.menu}>
           <ul className={h.menu_items}>
-            {selectedMenu.items.map(({ slug, title }) => (
+            {selectedMenu.items.map(({ url, title }) => (
               <li className={h.menu_item} key={title}>
                 <Link
-                  to={`${langCode === "nl" ? "" : `/${langCode}`}/${
-                    slug === null ? "" : slug
+                  to={`${langCode === "nl" ? "" : `/${langCode}`}${
+                    (url === '/nl/' || url === null) ? "/" : url
                   }`}
                 >
                   {title}

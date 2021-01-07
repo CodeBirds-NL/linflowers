@@ -1,0 +1,24 @@
+@use './../components/layout/layout.module.scss' as l;
+
+.text {
+  ul {
+    list-style-type: "\1F4AA";
+    padding-left: l.$su;
+  }
+}
+
+h4 {
+  margin-bottom: l.$su;
+  font-family: l.$body;
+  font-size: l.$su * 1.1;
+  color: l.$red;
+}
+
+.persons {
+  margin-top: l.$su;
+}
+.persons__title {
+  text-align: center;
+  padding: l.$su * 2 0 l.$su 0;
+  margin-bottom: 0;
+}

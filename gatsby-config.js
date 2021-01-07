@@ -18,6 +18,10 @@ const dropUnusedMediaNormalizer = {
 }
 
 module.exports = {
+  flags: {
+    LAZY_IMAGES: false,
+    QUERY_ON_DEMAND: false,
+  },
   siteMetadata: {
     title: `Linflowers Chrysanten`,
     description: `Partnership & Vakmanschap`,
@@ -62,7 +66,13 @@ module.exports = {
         protocol: `https`,
         hostingWPCOM: false,
         useACF: true,
-        includedRoutes: ["**/pages", "**/media", "**/menus", "**/posts"],
+        includedRoutes: [
+          "**/pages",
+          "**/media",
+          "**/menus",
+          "**/posts",
+          "**/products",
+        ],
         normalizers: normalizers => [dropUnusedMediaNormalizer, ...normalizers],
         concurrentRequests: 20,
         perPage: 50,

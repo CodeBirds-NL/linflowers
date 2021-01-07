@@ -9,10 +9,10 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Header from "./header/header"
+import Header from "../header/header"
 import "./layout.css"
 import l from "./layout.module.scss"
-import Footer from "./footer/footer"
+import Footer from "../footer/footer"
 
 const Layout = ({ children, langCode }) => {
   const data = useStaticQuery(graphql`
@@ -28,6 +28,9 @@ const Layout = ({ children, langCode }) => {
             name
           }
         }
+      }
+      wordpressSiteMetadata {
+        url
       }
       wordpressPage(slug: { eq: "header-footer" }) {
         acf {
@@ -87,17 +90,36 @@ const Layout = ({ children, langCode }) => {
     }
   `)
 
+  const formatMenuItemUrl = item => {
+    let obj = { ...item }
+    obj.url = obj.url.replace(wpSiteUrl, "")
+    if (obj.child_items) {
+      obj.child_items = formatMenuItemUrl(obj.child_items)
+    }
+    return obj
+  }
+
+  const wpSiteUrl = data.wordpressSiteMetadata.url
+  const menus = data.allWordpressMenusMenusItems.edges.map(i => {
+    // Return object with slugs updated
+    let menu = { ...i }
+    menu.node.items = menu.node.items.map(item => {
+      return formatMenuItemUrl(item)
+    })
+    return menu
+  })
+
   return (
     <>
       <Header
         langCode={langCode}
-        menuItems={data.allWordpressMenusMenusItems.edges}
+        menuItems={menus}
         metaData={data.wordpressPage.acf.header_footer}
       />
       <main className={l.main}>{children}</main>
       <Footer
         langCode={langCode}
-        menuItems={data.allWordpressMenusMenusItems.edges}
+        menuItems={menus}
         data={{ ...data.wordpressPage.acf.header_footer.footer }}
         logo={data.wordpressPage.acf.header_footer.site_logo}
       />
