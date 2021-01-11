@@ -1,0 +1,27 @@
+@use './../components/layout/layout.module.scss' as l;
+
+.posts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: l.$su * 2;
+  .post {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    gap: l.$su;
+    &__content {
+      h4 {
+        color: l.$black;
+        font-size: l.$su * 1.25;
+        font-weight: bold;
+      }
+      p {
+        color: l.$antra;
+        margin-bottom: 0;
+      }
+      a {
+        color: l.$red;
+        // font-weight: bold;
+      }
+    }
+  }
+}

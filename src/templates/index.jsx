@@ -7,7 +7,6 @@ import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 import Row from "../components/row"
 import Arrow from "../components/slider/Arrow"
-// import Spacer from "../components/spacer"
 import useKeyPress from "../components/utils/hooks/useKeyPress"
 
 import i from "./index.module.scss"
@@ -72,16 +71,6 @@ const IndexTemplate = ({ data }) => {
       </Row>
       <Row backgroundColor="#f9f4f0">
         <Persons persons={acf.home.about.persons} customClass={i.persons} />
-        {/* <div className={i.persons}>
-          {acf.home.about.persons.map(({ title, url, image }) => (
-            <Link to={url} key={title} className={i.box}>
-              <div className={i.imageWrapper}>
-                <Img fixed={image.localFile.childImageSharp.fixed} />
-              </div>
-              <button className={i.contact_button}>{title}</button>
-            </Link>
-          ))}
-        </div> */}
         <div className={i.about}>
           <div
             className={i.text}

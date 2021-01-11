@@ -43,7 +43,6 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             wordpress_id
-            title
             slug
             lang_code
             template
@@ -72,7 +71,47 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  const allQueryResults = [indexResult, aboutResult, assortimentResult]
+  const postsArchiveResult = await graphql(`
+    {
+      allWordpressPage(filter: { template: { eq: "posts.php" } }) {
+        edges {
+          node {
+            wordpress_id
+            slug
+            lang_code
+            template
+            featured_media {
+              alt_text
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 1500) {
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                  }
+                }
+              }
+            }
+            acf {
+              blog_archive {
+                title
+                btn_label
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const allQueryResults = [
+    indexResult,
+    aboutResult,
+    assortimentResult,
+    postsArchiveResult,
+  ]
 
   // Check for any errors
   allQueryResults.forEach(i => {
