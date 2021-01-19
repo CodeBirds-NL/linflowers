@@ -8,11 +8,11 @@ import SEO from "../components/seo"
 import Row from "../components/row"
 import Arrow from "../components/slider/Arrow"
 import useKeyPress from "../components/utils/hooks/useKeyPress"
+import Persons from "../components/persons"
 
 import i from "./index.module.scss"
 import l from "../components/layout/layout.module.scss"
 import "keen-slider/keen-slider.min.css"
-import Persons from "../components/persons"
 
 const IndexTemplate = ({ data }) => {
   const { title, lang_code, acf } = data.wordpressPage
@@ -55,7 +55,7 @@ const IndexTemplate = ({ data }) => {
             </button>
             {acf.home.hero.actions.map(({ title, url, image }) => (
               <Link to={url} key={title} className={i.action}>
-                <div className={i.imageWrapper}>
+                <div className={[i.imageWrapper, i.ma].join(" ")}>
                   <div className={i.circle}>
                     <Img
                       className={i.image}
@@ -69,7 +69,7 @@ const IndexTemplate = ({ data }) => {
           </div>
         </div>
       </Row>
-      <Row backgroundColor="#f9f4f0">
+      <Row>
         <Persons persons={acf.home.about.persons} customClass={i.persons} />
         <div className={i.about}>
           <div
@@ -152,14 +152,7 @@ export const data = graphql`
               title
               url
               image {
-                alt_text
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 600) {
-                      ...GatsbyImageSharpFluid
-                    }
-                  }
-                }
+                ...Action
               }
             }
             cta

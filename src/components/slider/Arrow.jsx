@@ -2,9 +2,14 @@ import React from "react"
 
 import s from "./slider.module.scss"
 
-const Arrow = ({ color = "#F9F4F0", direction = "left", clickHandler }) =>
+const Arrow = ({
+  color = "#F9F4F0",
+  direction = "left",
+  clickHandler,
+  src = "",
+}) =>
   direction === "left" ? (
-    <div className={s.arrow}>
+    <div className={[s.arrow, src && s.contact].join(" ")}>
       <svg
         width="21"
         height="36"
@@ -33,7 +38,7 @@ const Arrow = ({ color = "#F9F4F0", direction = "left", clickHandler }) =>
       </svg>
     </div>
   ) : (
-    <div className={[s.arrow, s.right].join(" ")}>
+    <div className={[s.arrow, s.right, src && s.contact].join(" ")}>
       <svg
         className={s.arrow}
         width="21"

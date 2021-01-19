@@ -4,7 +4,12 @@ import Img from "gatsby-image"
 
 import p from "./persons.module.scss"
 
-const Persons = ({ persons, customClass = "", label = true }) => {
+const Persons = ({
+  persons,
+  customClass = "",
+  label = true,
+  showNumber = false,
+}) => {
   return (
     <div className={[p.persons, customClass].join(" ")}>
       {persons.map(({ title, url, image }) => (
@@ -13,6 +18,12 @@ const Persons = ({ persons, customClass = "", label = true }) => {
             {image && <Img fixed={image.localFile.childImageSharp.fixed} />}
           </div>
           {label && <button className={p.contact_button}>{title}</button>}
+          {showNumber && (
+            <div>
+              <div>{title}</div>
+              <div>{url}</div>
+            </div>
+          )}
         </Link>
       ))}
     </div>

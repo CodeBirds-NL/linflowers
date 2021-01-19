@@ -11,6 +11,11 @@
   padding: l.$su l.$su * 4;
   margin-top: -100px;
   margin-bottom: 100px;
+  &.break_out {
+    /* break out means that there's a succeeding row on the page with a custom full-width background */
+    padding-bottom: 0;
+    margin-bottom: l.$su * 2;
+  }
   h1 {
     color: l.$red;
     font-family: l.$body;

@@ -5,8 +5,8 @@ import Layout from "./layout"
 
 import a from "./page_default_layout.module.scss"
 
-const PageDefaultLayout = ({ data, children }) => {
-  return (
+const PageDefaultLayout = ({ data, children, breakOut = false }) => {
+  return !breakOut ? (
     <Layout langCode={data.lang_code}>
       <Row
         customClass={a.hero}
@@ -19,6 +19,19 @@ const PageDefaultLayout = ({ data, children }) => {
         </div>
       </Row>
     </Layout>
+  ) : (
+    <>
+      <Row
+        customClass={a.hero}
+        backgroundImage={data.featured_media || data.image}
+      ></Row>
+      <Row>
+        <div className={[a.contentWrapper, a.break_out].join(" ")}>
+          <h1>{data.title}</h1>
+          {children}
+        </div>
+      </Row>
+    </>
   )
 }
 

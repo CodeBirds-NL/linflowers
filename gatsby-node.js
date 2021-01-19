@@ -106,11 +106,27 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  const contactResult = await graphql(`
+    {
+      allWordpressPage(filter: { template: { eq: "contact.php" } }) {
+        edges {
+          node {
+            wordpress_id
+            slug
+            lang_code
+            template
+          }
+        }
+      }
+    }
+  `)
+
   const allQueryResults = [
     indexResult,
     aboutResult,
     assortimentResult,
     postsArchiveResult,
+    contactResult,
   ]
 
   // Check for any errors

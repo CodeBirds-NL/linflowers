@@ -40,3 +40,16 @@ export const Pijler = graphql`
     }
   }
 `
+
+export const Action = graphql`
+  fragment Action on wordpress__wp_media {
+    alt_text
+    localFile {
+      childImageSharp {
+        fluid(maxWidth: 600) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`

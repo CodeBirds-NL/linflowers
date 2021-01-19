@@ -6,7 +6,7 @@ import l from "./layout/layout.module.scss"
 
 const Row = ({
   backgroundImage = "",
-  backgroundColor = "#F9F4F0",
+  backgroundColor = "white",
   id = null,
   children,
   customClass = '',
@@ -14,8 +14,8 @@ const Row = ({
   return (
     <div
       id={id}
-      className={[l.row, customClass ].join(' ')}
-      style={!backgroundImage ? { backgroundColor } : {}}
+      className={[l.row, customClass, !backgroundImage && l[backgroundColor] ].join(' ')}
+      // style={!backgroundImage ? { backgroundColor } : {}}
     >
       {backgroundImage ? (
         <Img

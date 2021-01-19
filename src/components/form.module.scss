@@ -1,0 +1,65 @@
+@use './../components/layout/layout.module.scss' as l;
+
+.form {
+  width: 100%;
+  .form_group {
+    display: inline-block;
+    position: relative;
+    margin-bottom: l.$su;
+
+    input,
+    textarea {
+      font-size: 20px;
+      width: 100%;
+      border: 0;
+      border: 3px solid l.$gray;
+      padding: 5px 10px;
+      line-height: 1.5em;
+      background-color: transparent;
+      &:focus {
+        border-color: l.$red;
+        outline: 0;
+      }
+      @include l.border-radius(l.$btn-b-r);
+      transition: border-color 0.25s ease-out;
+      -webkit-transition: border-color 0.25s ease-out;
+      -moz-transition: border-color 0.25s ease-out;
+      -ms-transition: border-color 0.25s ease-out;
+      -o-transition: border-color 0.25s ease-out;
+    }
+  }
+}
+
+.message {
+  padding: 0 0 1.45rem 34px;
+  color: l.$black;
+  font-size: 16px;
+  position: relative;
+  display: none;
+  &:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    transform: rotate(45deg);
+    height: 24px;
+    width: 12px;
+    border-bottom: 3px solid l.$red;
+    border-right: 3px solid l.$red;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+  }
+  &.success {
+    display: block;
+  }
+}
+
+.consent {
+  margin-top: 1rem;
+  color: l.$black;
+  a {
+    color: l.$red;
+  }
+}
