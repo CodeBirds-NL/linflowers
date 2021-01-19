@@ -119,6 +119,7 @@ const ContactTemplate = ({ pageContext, data }) => {
           </div>
         </Row>
       </div>
+      <div className={c.spacer}></div>
     </Layout>
   )
 }

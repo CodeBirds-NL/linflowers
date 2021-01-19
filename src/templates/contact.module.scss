@@ -86,9 +86,6 @@
     margin: auto;
     padding: l.$su * 5 l.$su * 4;
   }
-
-  /* Don't like the footer so close to me :) */
-  padding-bottom: l.$su * 4;
 }
 
 // Use features from row but position absolutely on slider
@@ -105,4 +102,10 @@
     // reference point for absolute positioned arrows as parent is already absolute positined
     position: relative;
   }
+}
+
+.spacer {
+  /* Don't like the footer so close to me :) */
+  height: l.$su * 4;
+  background-color: l.$white;
 }
