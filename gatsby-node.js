@@ -121,12 +121,28 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  const productResult = await graphql(`
+    {
+      allWordpressWpProducts {
+        edges {
+          node {
+            wordpress_id
+            slug
+            lang_code
+            template
+          }
+        }
+      }
+    }
+  `)
+
   const allQueryResults = [
     indexResult,
     aboutResult,
     assortimentResult,
     postsArchiveResult,
     contactResult,
+    productResult,
   ]
 
   // Check for any errors
@@ -138,13 +154,14 @@ exports.createPages = async ({ graphql, actions }) => {
   const templateFolder = "./src/templates"
   const templates = fs.readdirSync(templateFolder, (err, files) => files)
 
-  // Create multilingual pages for every 'page' such as home, about, etc.
+  // Create multilingual pages for every 'page' such as home, about, etc. in every post type
   for (const result of allQueryResults) {
-    const { allWordpressPage } = result.data
+    const postType =
+      result.data.allWordpressPage || result.data.allWordpressWpProducts
 
-    allWordpressPage.edges.forEach(({ node: i }) => {
+    postType.edges.forEach(({ node: i }) => {
       /**
-       * Template format is template_name.php
+       * Template format is template-name.php
        * @type {String}
        */
       let templateName = i.template.split(".")[0]
@@ -154,6 +171,11 @@ exports.createPages = async ({ graphql, actions }) => {
        * @type {String}
        */
       let langSlug = i.lang_code === "nl" ? "" : i.lang_code
+
+      /* Mimic parent slug behaviour by abusing language slug */
+      if (templateName === "product") {
+        langSlug = langSlug + "/assortiment"
+      }
 
       createPage({
         // use decoreURIComponent to parse russian characters

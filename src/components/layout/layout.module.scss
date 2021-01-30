@@ -50,6 +50,9 @@ body {
   &.white {
     background-color: $white;
   }
+  &.antra {
+    background-color: $antra;
+  }
 }
 
 .wrapper {
@@ -115,6 +118,15 @@ body {
     background-color: $red;
     color: $white;
   }
+}
+
+/* -------------
+SPACER
+---------------- */
+.spacer {
+  /* Don't like the footer so close to me :) */
+  height: $su * 4;
+  background-color: $white;
 }
 
 // iphone 5 styles

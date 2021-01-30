@@ -13,6 +13,7 @@ import useKeyPress from "../components/utils/hooks/useKeyPress"
 
 import c from "./contact.module.scss"
 import "keen-slider/keen-slider.min.css"
+import Spacer from "../components/spacer"
 
 const ContactTemplate = ({ pageContext, data }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -51,7 +52,12 @@ const ContactTemplate = ({ pageContext, data }) => {
         breakOut={true}
         data={{ ...pageContext, title, featured_media }}
       >
-        <Persons showNumber={true} label={false} persons={persons} />
+        <Persons
+          role={true}
+          showNumber={true}
+          label={false}
+          persons={persons}
+        />
       </PageDefaultLayout>
       <Row backgroundColor="" customClass={c.actions}>
         <div className={c.grid}>
@@ -119,7 +125,7 @@ const ContactTemplate = ({ pageContext, data }) => {
           </div>
         </Row>
       </div>
-      <div className={c.spacer}></div>
+      <Spacer />
     </Layout>
   )
 }
@@ -144,6 +150,7 @@ export const data = graphql`
           persons {
             title
             url
+            function
             image {
               ...Person
             }

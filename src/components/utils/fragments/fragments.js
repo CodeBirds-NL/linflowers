@@ -53,3 +53,16 @@ export const Action = graphql`
     }
   }
 `
+
+export const ProductImage = graphql`
+  fragment ProductImage on wordpress__wp_media {
+    alt_text
+    localFile {
+      childImageSharp {
+        fluid(maxWidth: 900) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`

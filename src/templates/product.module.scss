@@ -1,0 +1,70 @@
+@use './../components/layout/layout.module.scss' as l;
+
+.grid {
+  @include l.grid(2, l.$su * 2);
+}
+
+/* --------------- 
+GALLERY (left column) STYLES
+------------------ */
+.gallery {
+  .slider {
+    overflow: hidden;
+    display: flex;
+    .image {
+      height: 100%;
+      width: auto;
+      img {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .track {
+    margin-top: l.$su * 1.5;
+    @include l.grid(3, l.$su);
+    .container {
+      .image {
+        height: 100%;
+      }
+      cursor: pointer;
+      opacity: 0.7;
+      border: 2px solid transparent;
+      transition: border-color 0.25s ease, opacity 0.25s ease;
+      -webkit-transition: border-color 0.25s ease, opacity 0.25s ease;
+      -moz-transition: border-color 0.25s ease, opacity 0.25s ease;
+      -ms-transition: border-color 0.25s ease, opacity 0.25s ease;
+      -o-transition: border-color 0.25s ease, opacity 0.25s ease;
+    }
+    .container.active {
+      border-color: l.$antra;
+      opacity: 1;
+    }
+  }
+}
+
+/* --------------- 
+CONTENT (right column) STYLES
+------------------ */
+
+.content {
+  .name {
+    font-weight: bold;
+    font-size: 28px;
+    font-style: italic;
+    margin-bottom: l.$su * 1.5;
+  }
+  p {
+    padding-bottom: 0;
+    margin-bottom: l.$su * 0.8;
+  }
+}
+
+/* --------------- 
+CTA BANNER
+------------------ */
+.actions_section {
+  max-width: l.$heroMaxWidth;
+  margin: auto;
+  padding: l.$su * 2 0;
+}

@@ -36,7 +36,7 @@ const FlowersArchiveTemplate = ({ pageContext, data }) => {
 export default FlowersArchiveTemplate
 
 /**
- * Asynchronously gets products that have same lang code as passed in pageContext (passed from gatsby-node.js)
+ * Asynchronously gets products (to display) that have same lang code as passed in pageContext (passed from gatsby-node.js)
  * @param {Number} $lang_code - Id of the page
  * @returns {Object} data in format we queried it
  */
@@ -51,14 +51,7 @@ export const data = graphql`
             product {
               title
               thumbnail {
-                alt_text
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 600) {
-                      ...GatsbyImageSharpFluid
-                    }
-                  }
-                }
+                ...Action
               }
             }
           }

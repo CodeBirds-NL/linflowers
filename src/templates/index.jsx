@@ -13,6 +13,7 @@ import Persons from "../components/persons"
 import i from "./index.module.scss"
 import l from "../components/layout/layout.module.scss"
 import "keen-slider/keen-slider.min.css"
+import Actions from "../components/actions"
 
 const IndexTemplate = ({ data }) => {
   const { title, lang_code, acf } = data.wordpressPage
@@ -45,28 +46,14 @@ const IndexTemplate = ({ data }) => {
         backgroundImage={acf.home.hero.background_image}
       >
         <div className={i.hero_inner}>
-          <div>
-            <button id={i.watch_video}>
-              <Img
-                style={{ marginRight: "0.6rem" }}
-                fixed={acf.home.hero.cta_icon.localFile.childImageSharp.fixed}
-              />
-              {acf.home.hero.cta}
-            </button>
-            {acf.home.hero.actions.map(({ title, url, image }) => (
-              <Link to={url} key={title} className={i.action}>
-                <div className={[i.imageWrapper, i.ma].join(" ")}>
-                  <div className={i.circle}>
-                    <Img
-                      className={i.image}
-                      fluid={image.localFile.childImageSharp.fluid}
-                    />
-                  </div>
-                </div>
-                <div className={i.text}>{title}</div>
-              </Link>
-            ))}
-          </div>
+          <button id={i.watch_video}>
+            <Img
+              style={{ marginRight: "0.6rem" }}
+              fixed={acf.home.hero.cta_icon.localFile.childImageSharp.fixed}
+            />
+            {acf.home.hero.cta}
+          </button>
+          <Actions actions={acf.home.hero.actions} />
         </div>
       </Row>
       <Row>

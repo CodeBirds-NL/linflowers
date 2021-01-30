@@ -1,13 +1,9 @@
 import React from "react"
 
-const Spacer = ({ height = "4rem" }) => (
-  <div
-    style={{
-      height,
-      width: "100%",
-      backgroundColor: "transparent",
-    }}
-  ></div>
+import l from './layout/layout.module.scss'
+
+const Spacer = () => (
+  <div className={ l.spacer}></div>
 )
 
 export default Spacer

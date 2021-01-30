@@ -26,5 +26,9 @@ $heroMaxWidth: l.$heroMaxWidth;
       z-index: 1;
       @include l.border-radius(l.$btn-b-r);
     }
+    em {
+      font-size: 16px;
+      color: l.$antra;
+    }
   }
 }

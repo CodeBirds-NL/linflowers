@@ -30,34 +30,6 @@ $iconWidth: 100px;
     display: flex;
     align-items: center;
   }
-  // div containing all actions
-  & > div {
-    @include l.grid(3);
-  }
-  .action {
-    text-align: center;
-    color: l.$red;
-    font-weight: 600;
-  }
-}
-
-.imageWrapper {
-  // margin: auto;
-  &.ma {
-    margin: auto;
-  }
-  width: $actionCircleWidth;
-  height: $actionCircleWidth;
-  .circle {
-    border: 3px solid l.$red;
-    height: 100%;
-    display: grid;
-    @include l.border-radius(50%);
-  }
-  .image {
-    width: 50%;
-    margin: auto;
-  }
 }
 
 /* ----------------------

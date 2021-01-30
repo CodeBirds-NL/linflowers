@@ -9,11 +9,12 @@ const Persons = ({
   customClass = "",
   label = true,
   showNumber = false,
+  role = false,
 }) => {
   return (
     <div className={[p.persons, customClass].join(" ")}>
-      {persons.map(({ title, url, image }) => (
-        <Link to={url} key={image.id} className={p.box}>
+      {persons.map(({ title, url, image, function: func }) => (
+        <a href={`tel:${url}`} key={image.id} className={p.box}>
           <div className={p.imageWrapper}>
             {image && <Img fixed={image.localFile.childImageSharp.fixed} />}
           </div>
@@ -21,10 +22,11 @@ const Persons = ({
           {showNumber && (
             <div>
               <div>{title}</div>
+              {role && <em>{func}</em>}
               <div>{url}</div>
             </div>
           )}
-        </Link>
+        </a>
       ))}
     </div>
   )
