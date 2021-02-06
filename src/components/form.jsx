@@ -4,7 +4,7 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 import f from "./form.module.scss"
 import l from "./../components/layout/layout.module.scss"
 
-const Form = ({ form_fields, label }) => {
+const Form = ({ form_fields, label, productValues = "" }) => {
   const [formEntries, saveFormEntries] = useState({})
   const [formSent, setFormSent] = useState(false)
   const [formIsProcessing, setFormIsProcessing] = useState(false)
@@ -34,6 +34,11 @@ const Form = ({ form_fields, label }) => {
     e.preventDefault()
 
     const formData = new FormData()
+
+    // Product values if present
+    if (productValues) {
+      console.log(productValues)
+    }
 
     // Add form entries
     const sanitize = str => {
@@ -74,7 +79,10 @@ const Form = ({ form_fields, label }) => {
   return (
     <form ref={formRef} onSubmit={e => handleSubmit(e)} className={f.form}>
       {form_fields.map(({ type, label, width, required }, index) => (
-        <div style={{ width }} key={index} className={f.form_group}>
+        <div
+          key={index}
+          className={[f[`w${width.replace("%", "")}`], f.form_group].join(" ")}
+        >
           {type === "textarea" ? (
             <textarea
               rows="3"

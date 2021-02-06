@@ -1,0 +1,89 @@
+@use '../components/layout/layout.module.scss' as l;
+
+.products {
+  @include l.grid(3, l.$su);
+  margin-bottom: l.$su * 2;
+
+  .form_group {
+    display: inline-block;
+    position: relative;
+  }
+
+  input {
+    & + label {
+      padding-left: l.$su * 0.5;
+      font-size: 18px;
+      color: l.$antra;
+    }
+  }
+
+  /* CUSTOM CHECKBOX STYLES */
+  input[type="checkbox"] {
+    position: absolute; // take it out of document flow
+    opacity: 0; // hide it
+
+    & + label {
+      position: relative;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    // Box.
+    & + label:before {
+      content: "";
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: text-top;
+      width: 20px;
+      height: 20px;
+      background: white;
+    }
+
+    // Box hover
+    &:hover + label:before {
+      background: l.$red;
+    }
+
+    // Box focus
+    &:focus + label:before {
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+    }
+
+    // Box checked
+    &:checked + label:before {
+      background: l.$red;
+    }
+
+    // Checkmark. Could be replaced with an image
+    &:checked + label:after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 9px;
+      background: white;
+      width: 2px;
+      height: 2px;
+      box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white,
+        4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+      transform: rotate(45deg);
+    }
+  }
+
+  input[type="number"] {
+    width: l.$su * 4.5;
+    font-size: 16px;
+    border: 0;
+    padding: 5px;
+    line-height: 1.5em;
+    background-color: white;
+    &:focus {
+      box-shadow: 0 0 0 3px l.$gray;
+    }
+    @include l.border-radius(1px);
+    transition: border-color 0.25s ease-out;
+    -webkit-transition: border-color 0.25s ease-out;
+    -moz-transition: border-color 0.25s ease-out;
+    -ms-transition: border-color 0.25s ease-out;
+    -o-transition: border-color 0.25s ease-out;
+  }
+}

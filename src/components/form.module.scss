@@ -6,6 +6,20 @@
     display: inline-block;
     position: relative;
     margin-bottom: l.$su;
+    width: 100%;
+
+    /* This handles the padding if two boxes are 50% */
+    & + .w50 {
+      padding-right: l.$su;
+    }
+
+    &.w50 {
+      width: 50%;
+      & + .w50 {
+        padding-right: 0;
+        padding-left: l.$su;
+      }
+    }
 
     input,
     textarea {

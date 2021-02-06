@@ -136,6 +136,21 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  const landingsResult = await graphql(`
+    {
+      allWordpressPage(filter: { template: { eq: "landings.php" } }) {
+        edges {
+          node {
+            wordpress_id
+            slug
+            lang_code
+            template
+          }
+        }
+      }
+    }
+  `)
+
   const allQueryResults = [
     indexResult,
     aboutResult,
@@ -143,6 +158,7 @@ exports.createPages = async ({ graphql, actions }) => {
     postsArchiveResult,
     contactResult,
     productResult,
+    landingsResult,
   ]
 
   // Check for any errors
@@ -172,7 +188,7 @@ exports.createPages = async ({ graphql, actions }) => {
        */
       let langSlug = i.lang_code === "nl" ? "" : i.lang_code
 
-      /* Mimic parent slug behaviour by abusing language slug */
+      /* Mimic parent slug behaviour by abusing language slug for single product pages*/
       if (templateName === "product") {
         langSlug = langSlug + "/assortiment"
       }
