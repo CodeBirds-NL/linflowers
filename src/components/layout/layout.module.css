@@ -1,0 +1,147 @@
+/* Typography */
+/* COLORS */
+/* Sizing unit */
+body {
+  font-size: 18px;
+  overflow-x: hidden;
+  color: #383838;
+}
+
+.row {
+  position: relative;
+}
+
+.row.white {
+  background-color: #f9f4f0;
+}
+
+.row.antra {
+  background-color: #4b4550;
+}
+
+.wrapper {
+  padding: 0 40px;
+  min-height: inherit;
+  /* added to center inner hero block */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+.grid_2 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+}
+
+.grid_2_gap {
+  grid-gap: 2rem;
+}
+
+.grid_3 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+}
+
+.centered {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.overlay {
+  z-index: 1;
+  position: relative;
+}
+
+.overlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(56, 56, 56, 0.8);
+  z-index: -1;
+}
+
+/* -------------
+  Button
+  -------------- */
+.btn {
+  padding: 12px 22px;
+  font-size: 20px;
+  font-weight: 600;
+  z-index: 1;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: block;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.btn.red {
+  background-color: #ac423d;
+  color: #f9f4f0;
+}
+
+/* -------------
+SPACER
+---------------- */
+.spacer {
+  /* Don't like the footer so close to me :) */
+  height: 80px;
+  background-color: #f9f4f0;
+}
+
+@media (max-width: 330px) {
+  .wrapper {
+    padding: 0 22px;
+  }
+}
+
+@media (min-width: 330px) {
+  .wrapper {
+    padding: 0 30px;
+  }
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    padding: 0 3rem;
+  }
+}
+
+@media (min-width: 1224px) {
+  .container {
+    max-width: 1184px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1240px;
+  }
+}
+/*# sourceMappingURL=layout.module.css.map */

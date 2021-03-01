@@ -28,7 +28,12 @@ module.exports = {
     author: `@codebirds`,
   },
   plugins: [
-    `gatsby-plugin-sass`,
+    {
+      resolve: "gatsby-plugin-sass",
+      options: {
+        indentedSyntax: true,
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
