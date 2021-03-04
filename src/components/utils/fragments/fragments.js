@@ -59,8 +59,8 @@ export const ProductImage = graphql`
     alt_text
     localFile {
       childImageSharp {
-        fluid(maxWidth: 900) {
-          ...GatsbyImageSharpFluid
+        fluid(maxWidth: 800) {
+          ...GatsbyImageSharpFluid_withWebp_noBase64
         }
       }
     }
