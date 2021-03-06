@@ -1,5 +1,8 @@
 @use './../layout/layout.module.scss' as l;
 
+.wave_mobile {
+  display: none;
+}
 .footer {
   background-image: url("./../../images/footer_wave.svg");
   background-repeat: no-repeat;
@@ -72,6 +75,40 @@
       }
       a {
         color: l.$white;
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .wave_mobile {
+    background-color: l.$white;
+    display: block;
+    background-image: url("./../../images/footer_wave_mobile.svg");
+    background-size: cover;
+    height: 66px;
+    // Remove tiny white space between svg and footers
+    margin-bottom: -2px;
+  }
+  .footer {
+    background-image: unset;
+    .footer_inner {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      .col_1 {
+        padding-left: 0;
+        display: none; // Hide temporarily
+        .imageWrapper {
+          margin: 0;
+          margin-bottom: l.$su;
+        }
+        .menu {
+          flex-direction: column;
+        }
+      }
+      .col_2,
+      .col_3 {
+        padding-top: l.$su;
       }
     }
   }

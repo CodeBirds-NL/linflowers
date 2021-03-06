@@ -33,6 +33,22 @@ $heroMaxWidth: 900px;
   -o-transform: translateX(-50%);
 }
 
+@mixin translate($x: 0, $y: 0, $rot: 0) {
+  transform: translate($x, $y) rotate($rot);
+  -webkit-transform: translate($x, $y) rotate($rot);
+  -moz-transform: translate($x, $y) rotate($rot);
+  -ms-transform: translate($x, $y) rotate($rot);
+  -o-transform: translate($x, $y) rotate($rot);
+}
+
+@mixin transition($property, $dur, $timing) {
+  transition: $property $dur $timing;
+  -webkit-transition: $property $dur $timing;
+  -moz-transition: $property $dur $timing;
+  -ms-transition: $property $dur $timing;
+  -o-transition: $property $dur $timing;
+}
+
 @mixin grid($cols, $gap: 0) {
   display: grid;
   grid-template-columns: repeat($cols, 1fr);
@@ -52,6 +68,13 @@ body {
   }
   &.antra {
     background-color: $antra;
+  }
+}
+
+/* The only row that will ever be red is the footer, which should only happen onw mobile devices*/
+@media (max-width: 550px) {
+  .row.red {
+    background-color: $red;
   }
 }
 
@@ -132,20 +155,20 @@ SPACER
 // iphone 5 styles
 @media (max-width: 330px) {
   .wrapper {
-    padding: 0 22px;
+    padding: 0 15px;
   }
 }
 
 // iphone 5+ styles
 @media (min-width: 330px) {
   .wrapper {
-    padding: 0 30px;
+    padding: 0 20px;
   }
 }
 
 @media (min-width: 500px) {
   .wrapper {
-    padding: 0 3rem;
+    padding: 0 30px;
   }
 }
 

@@ -36,5 +36,15 @@ h4 {
     font-style: italic;
     color: l.$antra;
     margin-bottom: l.$su;
+    // float: right;
+  }
+}
+
+@media (max-width: 550px) {
+  .usp {
+    .image {
+      width: 100px;
+      margin-bottom: 20px;
+    }
   }
 }

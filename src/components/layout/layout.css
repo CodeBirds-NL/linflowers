@@ -356,3 +356,9 @@ p *:last-child {
 li > p {
   margin-bottom: calc(1.45rem / 2);
 }
+
+@media (max-width: 550px) {
+  h2 {
+    font-size: 32px;
+  }
+}

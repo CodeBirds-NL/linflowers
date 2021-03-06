@@ -42,7 +42,7 @@ const Layout = ({ children, langCode }) => {
               localFile {
                 childImageSharp {
                   fluid(maxWidth: 800) {
-                    ...GatsbyImageSharpFluid_withWebp
+                    ...GatsbyImageSharpFluid_noBase64
                   }
                 }
               }
@@ -54,7 +54,7 @@ const Layout = ({ children, langCode }) => {
                 localFile {
                   childImageSharp {
                     fixed(width: 24) {
-                      ...GatsbyImageSharpFixed_withWebp
+                      ...GatsbyImageSharpFixed_noBase64
                     }
                   }
                 }
@@ -65,7 +65,7 @@ const Layout = ({ children, langCode }) => {
                 localFile {
                   childImageSharp {
                     fixed(width: 24) {
-                      ...GatsbyImageSharpFixed_withWebp
+                      ...GatsbyImageSharpFixed_noBase64
                     }
                   }
                 }

@@ -40,7 +40,6 @@ const Arrow = ({
   ) : (
     <div className={[s.arrow, s.right, src && s.contact].join(" ")}>
       <svg
-        className={s.arrow}
         width="21"
         height="36"
         viewBox="0 0 21 36"
