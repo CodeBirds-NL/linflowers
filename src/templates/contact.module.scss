@@ -20,8 +20,16 @@
     &__left {
       display: flex;
       .iconWrapper {
-        @extend .imageWrapper;
+        display: flex;
         margin-right: l.$su;
+        height: 120px;
+        width: 120px;
+        border: 3px solid l.$red;
+        @include l.border-radius(50%);
+        .image {
+          width: 50%;
+          margin: auto;
+        }
       }
       p {
         margin-bottom: 0;

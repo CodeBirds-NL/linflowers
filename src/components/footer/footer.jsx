@@ -16,47 +16,50 @@ const Footer = ({ data, menuItems, langCode, logo }) => {
   const { col_2, col_3 } = data
 
   return (
-    <Row customClass={f.footer}>
-      <div className={f.footer_inner}>
-        <div className={f.col_1}>
-          <Img
-            className={f.imageWrapper}
-            fluid={logo.localFile.childImageSharp.fluid}
-          />
-          <ul className={f.menu}>
-            {selectedMenu.items.map(({ url, title }) => (
-              <li key={title}>
-                <Link
-                  to={`${langCode === "nl" ? "" : `/${langCode}`}${
-                    url === "/nl/" || url === null ? "/" : url
-                  }`}
-                >
-                  {title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+    <>
+      <div className={f.wave_mobile}></div>
+      <Row backgroundColor="red" customClass={f.footer}>
+        <div className={f.footer_inner}>
+          <div className={f.col_1}>
+            <Img
+              className={f.imageWrapper}
+              fluid={logo.localFile.childImageSharp.fluid}
+            />
+            <ul className={f.menu}>
+              {selectedMenu.items.map(({ url, title }) => (
+                <li key={title}>
+                  <Link
+                    to={`${langCode === "nl" ? "" : `/${langCode}`}${
+                      url === "/nl/" || url === null ? "/" : url
+                    }`}
+                  >
+                    {title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={f.col_2}>
+            <div className={f.col_title}>{col_2.title}</div>
+            <ul className={f.fields}>
+              {col_2.wordpress_fields.map(({ left, right }) => (
+                <li key={left}>
+                  <span>{left}</span>
+                  <span>{right}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={f.col_3}>
+            <div className={f.col_title}>{col_3.title}</div>
+            <div
+              className={f.contact}
+              dangerouslySetInnerHTML={{ __html: col_3.contact_details }}
+            />
+          </div>
         </div>
-        <div className={f.col_2}>
-          <div className={f.col_title}>{col_2.title}</div>
-          <ul className={f.fields}>
-            {col_2.wordpress_fields.map(({ left, right }) => (
-              <li key={left}>
-                <span>{left}</span>
-                <span>{right}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={f.col_3}>
-          <div className={f.col_title}>{col_3.title}</div>
-          <div
-            className={f.contact}
-            dangerouslySetInnerHTML={{ __html: col_3.contact_details }}
-          />
-        </div>
-      </div>
-    </Row>
+      </Row>
+    </>
   )
 }
 

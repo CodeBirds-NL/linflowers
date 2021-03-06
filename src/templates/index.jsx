@@ -7,13 +7,14 @@ import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 import Row from "../components/row"
 import Arrow from "../components/slider/Arrow"
-import useKeyPress from "../components/utils/hooks/useKeyPress"
 import Persons from "../components/persons"
+import Actions from "../components/actions"
+
+import useKeyPress from "../components/utils/hooks/useKeyPress"
 
 import i from "./index.module.scss"
 import l from "../components/layout/layout.module.scss"
 import "keen-slider/keen-slider.min.css"
-import Actions from "../components/actions"
 
 const IndexTemplate = ({ data }) => {
   const { title, lang_code, acf } = data.wordpressPage

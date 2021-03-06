@@ -38,3 +38,20 @@ $actionCircleWidth: 120px;
     }
   }
 }
+
+@media (max-width: 550px) {
+  $actionCircleWidth: 80px !global;
+  .actions {
+    .action {
+      font-size: 17px;
+      .text {
+        margin-top: l.$su * 0.5;
+      }
+    }
+
+    .imageWrapper {
+      width: $actionCircleWidth;
+      height: $actionCircleWidth;
+    }
+  }
+}

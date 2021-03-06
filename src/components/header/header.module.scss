@@ -1,5 +1,9 @@
 @use '../layout/layout.module.scss' as l;
 
+/* -----------------------------
+  1. TOPBAR 
+-------------------------------- */
+
 .topbar_row {
   background-image: url("./../../images/header_wave.svg");
   background-repeat: no-repeat;
@@ -30,16 +34,82 @@
   }
 }
 
-.siteLogo {
-  max-width: 450px;
-  margin: 0 auto;
-  padding: 1rem 0;
+/* -----------------------------
+  2. HEADER 
+-------------------------------- */
+
+.upper {
+  .siteLogo {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 1rem 0;
+  }
+  .toggle {
+    margin-left: auto;
+    width: 65px;
+    height: 65px;
+    background: #fff;
+    mix-blend-mode: normal;
+    box-shadow: 0px 0px 30px 5px rgba(171, 65, 62, 0.06);
+    border-radius: 90px;
+    padding: 0;
+    @include l.transition(all, 0.35s, ease-in-out);
+
+    // Center child
+    display: none; /* will be changed to flex on mobile */
+    align-items: center;
+    justify-content: center;
+
+    span {
+      position: relative;
+      height: 3.5px;
+      width: 38px;
+      background-color: l.$gray;
+      @include l.border-radius(50px);
+      @include l.transition(all, 0.35s, ease-in-out);
+
+      // top and bottom line
+      &::before,
+      &::after {
+        position: absolute;
+        height: 3.5px;
+        width: 38px;
+        left: 0;
+        content: "";
+        background-color: l.$gray;
+        @include l.border-radius(50px);
+        @include l.transition(all, 0.35s, ease-in-out);
+      }
+      &::before {
+        @include l.translate(0, -12px);
+      }
+      &::after {
+        @include l.translate(0, 12px);
+      }
+    }
+
+    /* Active state of toggle button */
+    &.toggled {
+      span {
+        @include l.translate(-38px);
+        background: transparent;
+
+        &::before {
+          @include l.translate(38px, 0, 45deg);
+        }
+        &::after {
+          @include l.translate(38px, 0, -45deg);
+        }
+      }
+    }
+  }
 }
 
 .menu {
   display: flex;
   justify-content: center;
   padding-bottom: 1rem;
+  background: transparent;
   ul.menu_items {
     display: flex;
     align-items: center;
@@ -53,6 +123,70 @@
       &:hover a {
         color: l.$red;
       }
+    }
+  }
+
+  &.toggled {
+    justify-content: flex-start;
+    padding: 0 30px;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    // Fill screen - height of topbar and .upper
+    height: calc(100vh - 170px);
+    z-index: 3;
+    background: l.$white;
+
+    ul.menu_items {
+      flex-direction: column;
+      align-items: flex-start;
+      font-weight: 600;
+      font-size: 45px;
+      text-transform: lowercase;
+      color: l.$antra;
+      font-family: l.$headings;
+      // opacity: 0.9;
+      li.menu_item {
+        margin-right: 0;
+        line-height: 1.5em;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  /* Topbar mobile styles */
+  .topbar_row {
+    background-image: url("./../../images/header_wave_mobile.svg");
+    background-size: contain;
+    height: 66px;
+  }
+  .topbar .contactInfo {
+    display: none;
+  }
+
+  /* Header mobile styles */
+  .menu {
+    display: none;
+    &.toggled {
+      display: flex;
+    }
+  }
+
+  .upper {
+    margin: l.$su 0;
+    display: grid;
+    grid-template-columns: minmax(200px, 300px) auto;
+    // Align Logo left
+    .siteLogo {
+      padding: 0;
+      padding-right: l.$su * 0.5;
+      margin: auto 0;
+      margin-left: -8px;
+    }
+    .toggle {
+      display: flex;
     }
   }
 }

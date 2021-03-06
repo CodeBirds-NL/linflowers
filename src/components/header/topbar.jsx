@@ -11,11 +11,11 @@ const TopBar = ({ data }) => {
     <Row customClass={h.topbar_row}>
       <div className={[h.topbar].join(" ")}>
         <div className={h.contactInfo}>
-          <a href={`mailto:${email}`} className={h.tel}>
+          <a href={`tel:${tel}`} className={h.tel}>
             <Img fixed={tel_icon.localFile.childImageSharp.fixed} />
             <span>{tel}</span>
           </a>
-          <a href={`tel:${tel}`} className={h.email}>
+          <a href={`mailto:${email}`} className={h.email}>
             <Img fixed={email_icon.localFile.childImageSharp.fixed} />
             <span>{email}</span>
           </a>

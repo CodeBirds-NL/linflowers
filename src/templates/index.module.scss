@@ -8,7 +8,8 @@ $iconWidth: 100px;
 1. HERO 
 ---------------------- */
 .hero {
-  min-height: calc(100vh - 236.5px);
+  min-height: auto;
+  padding: l.$su * 4 0;
 }
 
 .hero_inner {
@@ -68,6 +69,8 @@ $iconWidth: 100px;
   & > div {
     max-width: 900px;
     margin: auto;
+    position: unset;
+    padding: 0 l.$su * 1;
   }
 }
 
@@ -151,4 +154,20 @@ $iconWidth: 100px;
 
   /* Add some whitespace between start footer and this section */
   padding-bottom: l.$su * 3;
+}
+
+@media (max-width: 550px) {
+  .hero .hero_inner {
+    padding: l.$su * 2.5 0 l.$su * 1.5 0;
+  }
+  .persons {
+    display: none;
+  }
+
+  .usps_wrapper {
+    & > div {
+      max-width: 320px;
+      position: relative;
+    }
+  }
 }

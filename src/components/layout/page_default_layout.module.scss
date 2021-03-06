@@ -25,3 +25,10 @@
     margin-bottom: l.$su * 2;
   }
 }
+
+@media (max-width: 550px) {
+  .contentWrapper {
+    padding: l.$su l.$su * 0.5;
+    margin-bottom: 0;
+  }
+}

@@ -63,12 +63,12 @@ const ContactTemplate = ({ pageContext, data }) => {
         <div className={c.grid}>
           <div className={c.grid__left}>
             <div className={[c.iconWrapper].join(" ")}>
-              <div className={c.circle}>
-                <Img
-                  className={c.image}
-                  fluid={featured_action.image.localFile.childImageSharp.fluid}
-                />
-              </div>
+              {/* <div className={c.circle}> */}
+              <Img
+                className={c.image}
+                fluid={featured_action.image.localFile.childImageSharp.fluid}
+              />
+              {/* </div> */}
             </div>
             <div className={c.textContent}>
               <strong>{featured_action.title}</strong>
