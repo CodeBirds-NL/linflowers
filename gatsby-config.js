@@ -18,10 +18,7 @@ const dropUnusedMediaNormalizer = {
 }
 
 module.exports = {
-  flags: {
-    LAZY_IMAGES: false,
-    QUERY_ON_DEMAND: false,
-  },
+  pathPrefix: "/linflowers",
   siteMetadata: {
     title: `Linflowers Chrysanten`,
     description: `Partnership & Vakmanschap`,
