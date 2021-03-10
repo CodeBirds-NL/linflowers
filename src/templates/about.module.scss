@@ -2,8 +2,28 @@
 
 .text {
   ul {
-    list-style-type: "\1F4AA";
-    padding-left: l.$su;
+    li {
+      position: relative;
+      padding-left: l.$su * 1.5;
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        display: block;
+        background-color: l.$white;
+        width: 18px;
+        height: 12px;
+        border-bottom: 4px solid l.$red;
+        border-left: 4px solid l.$red;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform-origin: left top;
+      }
+    }
   }
 }
 
@@ -15,11 +35,11 @@ h4 {
 }
 
 .persons {
-  margin-top: l.$su;
+  padding-bottom: l.$su * 2;
 }
 .persons__title {
   text-align: center;
-  padding: l.$su * 2 0 l.$su 0;
+  padding: l.$su * 3 0 l.$su * 2 0;
   margin-bottom: 0;
 }
 
@@ -44,7 +64,8 @@ h4 {
   .usp {
     .image {
       width: 100px;
-      margin-bottom: 20px;
+      margin-bottom: l.$su * 1.5;
+      margin-right: l.$su;
     }
   }
 }

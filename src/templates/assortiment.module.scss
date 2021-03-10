@@ -19,3 +19,14 @@
     }
   }
 }
+
+@media (max-width: 550px) {
+  .products {
+    grid-template-columns: 1fr 1fr;
+    gap: l.$su;
+    & > a:nth-child(3n + 2) {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}

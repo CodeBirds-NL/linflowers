@@ -130,26 +130,25 @@
     justify-content: flex-start;
     padding: 0 30px;
     position: absolute;
-    top: -2px;
+    top: -2px; // otherwise some glitch is visibly
     left: 0;
     right: 0;
     // Fill screen - height of topbar and .upper
-    height: calc(100vh - 170px);
+    height: calc(100vh - 134px);
     z-index: 3;
     background: l.$white;
+    // Some box-shadow on the bottom
+    box-shadow: 0 25px 15px 0px rgba($color: #000000, $alpha: 0.1);
 
     ul.menu_items {
       flex-direction: column;
       align-items: flex-start;
       font-weight: 600;
-      font-size: 45px;
-      text-transform: lowercase;
+      font-size: 32px;
       color: l.$antra;
-      font-family: l.$headings;
-      // opacity: 0.9;
       li.menu_item {
         margin-right: 0;
-        line-height: 1.5em;
+        line-height: 1.7em;
       }
     }
   }
@@ -160,7 +159,7 @@
   .topbar_row {
     background-image: url("./../../images/header_wave_mobile.svg");
     background-size: contain;
-    height: 66px;
+    height: 30px;
   }
   .topbar .contactInfo {
     display: none;
@@ -185,6 +184,8 @@
       margin: auto 0;
       margin-left: -8px;
     }
+
+    // Toggle button is normally hidden with display: none;
     .toggle {
       display: flex;
     }

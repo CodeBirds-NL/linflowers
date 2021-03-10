@@ -68,3 +68,9 @@ CTA BANNER
   margin: auto;
   padding: l.$su * 2 0;
 }
+
+@media (max-width: 550px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
