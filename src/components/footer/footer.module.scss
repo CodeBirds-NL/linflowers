@@ -1,4 +1,4 @@
-@use './../layout/layout.module.scss' as l;
+@use './../../styles/shared.scss' as *;
 
 .wave_mobile {
   display: none;
@@ -7,12 +7,11 @@
   background-image: url("./../../images/footer_wave.svg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: l.$white;
+  background-color: $white;
 }
 
 .footer_inner {
-  display: grid;
-  grid-template-columns: 2.1fr 1fr 0.9fr;
+  @include grid(2.1fr 1fr 0.9fr);
   .col_1 {
     padding-left: 18%;
     .imageWrapper {
@@ -23,12 +22,12 @@
     .menu {
       display: flex;
       flex-direction: row;
-      color: l.$white;
+      color: $white;
       font-size: 18px;
       font-weight: 600;
       li {
-        margin-right: l.$su * 0.5;
-        padding-right: l.$su * 0.5;
+        margin-right: $su * 0.5;
+        padding-right: $su * 0.5;
         position: relative;
         &::after {
           content: "";
@@ -36,7 +35,7 @@
           right: 0;
           top: 0;
           width: 3px;
-          background-color: l.$white;
+          background-color: $white;
           height: 100%;
         }
 
@@ -51,18 +50,17 @@
   .col_title {
     font-size: 32px;
     font-weight: 600;
-    margin-bottom: l.$su * 0.5;
+    margin-bottom: $su * 0.5;
   }
   .col_2,
   .col_3 {
     padding: 40px 0 10px 0;
-    color: l.$white;
+    color: $white;
   }
 
   .col_2 {
     .fields li {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      @include grid(2);
       line-height: 1.5em;
       margin-bottom: 0;
     }
@@ -74,7 +72,7 @@
         line-height: 1.5em;
       }
       a {
-        color: l.$white;
+        color: $white;
       }
     }
   }
@@ -82,13 +80,14 @@
 
 @media (max-width: 550px) {
   .wave_mobile {
-    background-color: l.$white;
+    background-color: $white;
     display: block;
     background-image: url("./../../images/footer_wave_mobile.svg");
     background-size: cover;
-    height: 66px;
+    height: 30px;
     // Remove tiny white space between svg and footers
     margin-bottom: -2px;
+    z-index: 99;
   }
   .footer {
     background-image: unset;
@@ -100,7 +99,7 @@
         display: none; // Hide temporarily
         .imageWrapper {
           margin: 0;
-          margin-bottom: l.$su;
+          margin-bottom: $su;
         }
         .menu {
           flex-direction: column;
@@ -108,7 +107,7 @@
       }
       .col_2,
       .col_3 {
-        padding-top: l.$su;
+        padding-top: $su;
       }
     }
   }

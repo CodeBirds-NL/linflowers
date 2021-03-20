@@ -1,26 +1,22 @@
-@use './../components/layout/layout.module.scss' as l;
+@use './../styles/shared.scss' as *;
 
 .text {
   ul {
     li {
       position: relative;
-      padding-left: l.$su * 1.5;
+      padding-left: $su * 1.5;
       &:before {
         content: "";
         position: absolute;
         left: 0;
         bottom: 0;
         display: block;
-        background-color: l.$white;
+        background-color: $white;
         width: 18px;
         height: 12px;
-        border-bottom: 4px solid l.$red;
-        border-left: 4px solid l.$red;
-        transform: rotate(-45deg);
-        -webkit-transform: rotate(-45deg);
-        -moz-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-        -o-transform: rotate(-45deg);
+        border-bottom: 4px solid $red;
+        border-left: 4px solid $red;
+        @include transform(rotate(-45deg));
         transform-origin: left top;
       }
     }
@@ -28,34 +24,34 @@
 }
 
 h4 {
-  margin-bottom: l.$su;
-  font-family: l.$body;
-  font-size: l.$su * 1.1;
-  color: l.$red;
+  margin-bottom: $su;
+  font-family: $body;
+  font-size: $su * 1.1;
+  color: $red;
 }
 
 .persons {
-  padding-bottom: l.$su * 2;
+  padding-bottom: $su * 2;
 }
 .persons__title {
   text-align: center;
-  padding: l.$su * 3 0 l.$su * 2 0;
+  padding: $su * 3 0 $su * 2 0;
   margin-bottom: 0;
 }
 
 .usps {
-  margin: l.$su * 2 0;
+  margin: $su * 2 0;
 }
 .usp {
   .image {
     width: 150px;
     float: left;
-    margin-right: l.$su * 2;
+    margin-right: $su * 2;
   }
   .quote {
     font-style: italic;
-    color: l.$antra;
-    margin-bottom: l.$su;
+    color: $antra;
+    margin-bottom: $su;
     // float: right;
   }
 }
@@ -64,8 +60,8 @@ h4 {
   .usp {
     .image {
       width: 100px;
-      margin-bottom: l.$su * 1.5;
-      margin-right: l.$su;
+      margin-bottom: $su * 1.5;
+      margin-right: $su;
     }
   }
 }

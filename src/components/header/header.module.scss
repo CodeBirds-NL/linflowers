@@ -1,4 +1,4 @@
-@use '../layout/layout.module.scss' as l;
+@use './../../styles/shared.scss' as *;
 
 /* -----------------------------
   1. TOPBAR 
@@ -8,7 +8,7 @@
   background-image: url("./../../images/header_wave.svg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: l.$su * 4;
+  height: $su * 4;
 }
 
 .topbar {
@@ -19,7 +19,7 @@
     align-items: flex-start;
     padding-top: 15px;
     .tel {
-      margin-right: 2 * l.$su;
+      margin-right: 2 * $su;
     }
     .tel,
     .email {
@@ -27,8 +27,8 @@
       align-items: center;
       span {
         display: inline-block;
-        padding-left: l.$su * 0.5;
-        color: l.$white;
+        padding-left: $su * 0.5;
+        color: $white;
       }
     }
   }
@@ -53,7 +53,7 @@
     box-shadow: 0px 0px 30px 5px rgba(171, 65, 62, 0.06);
     border-radius: 90px;
     padding: 0;
-    @include l.transition(all, 0.35s, ease-in-out);
+    @include transition(all 0.35s ease-in-out);
 
     // Center child
     display: none; /* will be changed to flex on mobile */
@@ -64,9 +64,9 @@
       position: relative;
       height: 3.5px;
       width: 38px;
-      background-color: l.$gray;
-      @include l.border-radius(50px);
-      @include l.transition(all, 0.35s, ease-in-out);
+      background-color: $gray;
+      @include border-radius(50px);
+      @include transition(all 0.35s ease-in-out);
 
       // top and bottom line
       &::before,
@@ -76,29 +76,29 @@
         width: 38px;
         left: 0;
         content: "";
-        background-color: l.$gray;
-        @include l.border-radius(50px);
-        @include l.transition(all, 0.35s, ease-in-out);
+        background-color: $gray;
+        @include border-radius(50px);
+        @include transition(all 0.35s ease-in-out);
       }
       &::before {
-        @include l.translate(0, -12px);
+        @include transform(translate(0, -12px));
       }
       &::after {
-        @include l.translate(0, 12px);
+        @include transform(translate(0, 12px));
       }
     }
 
     /* Active state of toggle button */
     &.toggled {
       span {
-        @include l.translate(-38px);
+        @include transform(translate(-38px, 0));
         background: transparent;
 
         &::before {
-          @include l.translate(38px, 0, 45deg);
+          @include transform(translate(38px, 0) rotate(45deg));
         }
         &::after {
-          @include l.translate(38px, 0, -45deg);
+          @include transform(translate(38px, 0) rotate(-45deg));
         }
       }
     }
@@ -121,7 +121,7 @@
         margin-right: 0;
       }
       &:hover a {
-        color: l.$red;
+        color: $red;
       }
     }
   }
@@ -136,7 +136,7 @@
     // Fill screen - height of topbar and .upper
     height: calc(100vh - 134px);
     z-index: 3;
-    background: l.$white;
+    background: $white;
     // Some box-shadow on the bottom
     box-shadow: 0 25px 15px 0px rgba($color: #000000, $alpha: 0.1);
 
@@ -145,7 +145,7 @@
       align-items: flex-start;
       font-weight: 600;
       font-size: 32px;
-      color: l.$antra;
+      color: $antra;
       li.menu_item {
         margin-right: 0;
         line-height: 1.7em;
@@ -174,13 +174,12 @@
   }
 
   .upper {
-    margin: l.$su 0;
-    display: grid;
-    grid-template-columns: minmax(200px, 300px) auto;
+    margin: $su 0;
+    @include grid(minmax(200px, 300px) auto);
     // Align Logo left
     .siteLogo {
       padding: 0;
-      padding-right: l.$su * 0.5;
+      padding-right: $su * 0.5;
       margin: auto 0;
       margin-left: -8px;
     }

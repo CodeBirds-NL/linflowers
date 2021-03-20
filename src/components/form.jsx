@@ -4,7 +4,12 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 import f from "./form.module.scss"
 import l from "./../components/layout/layout.module.scss"
 
-const Form = ({ form_fields, label, productValues = "" }) => {
+const Form = ({
+  form_fields,
+  label,
+  productValues = "",
+  resetHandler = "",
+}) => {
   const [formEntries, saveFormEntries] = useState({})
   const [formSent, setFormSent] = useState(false)
   const [formIsProcessing, setFormIsProcessing] = useState(false)
@@ -37,7 +42,7 @@ const Form = ({ form_fields, label, productValues = "" }) => {
 
     // Product values if present
     if (productValues) {
-      console.log(productValues)
+      return console.log(productValues)
     }
 
     // Add form entries
@@ -63,6 +68,8 @@ const Form = ({ form_fields, label, productValues = "" }) => {
           // reset state container entries and form itself
           formRef.current.reset()
           saveFormEntries({})
+          // Resets offerte/proefbos inputs
+          resetHandler && resetHandler()
 
           setFormIsProcessing(false)
           setFormSent(true)
@@ -77,7 +84,12 @@ const Form = ({ form_fields, label, productValues = "" }) => {
   }
 
   return (
-    <form ref={formRef} onSubmit={e => handleSubmit(e)} className={f.form}>
+    <form
+      autoComplete="offf"
+      ref={formRef}
+      onSubmit={e => handleSubmit(e)}
+      className={f.form}
+    >
       {form_fields.map(({ type, label, width, required }, index) => (
         <div
           key={index}

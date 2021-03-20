@@ -1,8 +1,8 @@
-@use '../components/layout/layout.module.scss' as l;
+@use './../styles/shared.scss' as *;
 
 .products {
-  @include l.grid(3, l.$su);
-  margin-bottom: l.$su * 2;
+  @include grid(3, $su);
+  margin-bottom: $su * 2;
 
   .form_group {
     display: inline-block;
@@ -11,9 +11,9 @@
 
   input {
     & + label {
-      padding-left: l.$su * 0.5;
+      padding-left: $su * 0.5;
       font-size: 18px;
-      color: l.$antra;
+      color: $antra;
     }
   }
 
@@ -41,7 +41,7 @@
 
     // Box hover
     &:hover + label:before {
-      background: l.$red;
+      background: $red;
     }
 
     // Box focus
@@ -51,7 +51,7 @@
 
     // Box checked
     &:checked + label:before {
-      background: l.$red;
+      background: $red;
     }
 
     // Checkmark. Could be replaced with an image
@@ -70,20 +70,49 @@
   }
 
   input[type="number"] {
-    width: l.$su * 4.5;
+    width: $su * 4.5;
     font-size: 16px;
     border: 0;
     padding: 5px;
     line-height: 1.5em;
     background-color: white;
     &:focus {
-      box-shadow: 0 0 0 3px l.$gray;
+      box-shadow: 0 0 0 3px $gray;
     }
-    @include l.border-radius(1px);
+    @include border-radius(1px);
     transition: border-color 0.25s ease-out;
     -webkit-transition: border-color 0.25s ease-out;
     -moz-transition: border-color 0.25s ease-out;
     -ms-transition: border-color 0.25s ease-out;
     -o-transition: border-color 0.25s ease-out;
+  }
+}
+
+@media (max-width: 910px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: $su * 1;
+  }
+}
+
+@media (max-width: 500px) {
+  .products .form_group {
+    display: flex;
+    label {
+      padding-left: 5px;
+      padding-bottom: 5px;
+      font-size: 20px;
+    }
+    flex-direction: column-reverse;
+    input[type="number"] {
+      width: 100%;
+    }
+
+    // Checkbox styles -> proefbos
+    input[type="checkbox"] {
+      & + label {
+        font-size: 18px;
+      }
+    }
   }
 }

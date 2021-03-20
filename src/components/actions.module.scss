@@ -1,4 +1,4 @@
-@use './layout/layout.module.scss' as l;
+@use './../styles/shared.scss' as *;
 
 $actionCircleWidth: 120px;
 
@@ -6,16 +6,16 @@ $actionCircleWidth: 120px;
   ACTIONS
   -------------------- */
 .actions {
-  @include l.grid(3);
+  @include grid(3);
 
   .action {
     text-align: center;
-    color: l.$red;
+    color: $red;
     font-weight: 600;
     &.white {
-      color: l.$white;
+      color: $white;
       .circle {
-        border-color: l.$white;
+        border-color: $white;
       }
     }
   }
@@ -27,10 +27,10 @@ $actionCircleWidth: 120px;
     width: $actionCircleWidth;
     height: $actionCircleWidth;
     .circle {
-      border: 3px solid l.$red;
+      border: 3px solid $red;
       height: 100%;
       display: grid;
-      @include l.border-radius(50%);
+      @include border-radius(50%);
     }
     .image {
       width: 50%;
@@ -45,7 +45,7 @@ $actionCircleWidth: 120px;
     .action {
       font-size: 17px;
       .text {
-        margin-top: l.$su * 0.5;
+        margin-top: $su * 0.5;
       }
     }
 

@@ -151,6 +151,21 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  const postsResult = await graphql(`
+    {
+      allWordpressPost {
+        edges {
+          node {
+            wordpress_id
+            slug
+            lang_code
+            template
+          }
+        }
+      }
+    }
+  `)
+
   const allQueryResults = [
     indexResult,
     aboutResult,
@@ -159,6 +174,7 @@ exports.createPages = async ({ graphql, actions }) => {
     contactResult,
     productResult,
     landingsResult,
+    postsResult,
   ]
 
   // Check for any errors
@@ -173,7 +189,9 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create multilingual pages for every 'page' such as home, about, etc. in every post type
   for (const result of allQueryResults) {
     const postType =
-      result.data.allWordpressPage || result.data.allWordpressWpProducts
+      result.data.allWordpressPage ||
+      result.data.allWordpressWpProducts ||
+      result.data.allWordpressPost
 
     postType.edges.forEach(({ node: i }) => {
       /**
@@ -189,8 +207,13 @@ exports.createPages = async ({ graphql, actions }) => {
       let langSlug = i.lang_code === "nl" ? "" : i.lang_code
 
       /* Mimic parent slug behaviour by abusing language slug for single product pages*/
+      /**
+       * @todo get parent slug in right language!
+       */
       if (templateName === "product") {
-        langSlug = langSlug + "/assortiment"
+        langSlug += "/assortiment"
+      } else if (templateName === "post") {
+        langSlug += "/laatste-nieuws"
       }
 
       createPage({

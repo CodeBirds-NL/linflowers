@@ -1,6 +1,6 @@
-@use '../components/layout/layout.module.scss' as l;
+// @use '../components/layout/layout.module.scss' as l;
+@use './../styles/shared.scss' as *;
 
-$heroMaxWidth: l.$heroMaxWidth;
 $actionCircleWidth: 120px;
 $iconWidth: 100px;
 
@@ -9,23 +9,23 @@ $iconWidth: 100px;
 ---------------------- */
 .hero {
   min-height: auto;
-  padding: l.$su * 4 0;
+  padding: $su * 4 0;
 }
 
 .hero_inner {
-  background-color: rgba($color: l.$white, $alpha: 0.8);
-  padding: 3 * l.$su 0;
+  background-color: rgba($color: $white, $alpha: 0.8);
+  padding: 3 * $su 0;
   max-width: $heroMaxWidth;
   margin: auto;
-  @include l.border-radius(l.$block-b-r);
+  @include border-radius($block-b-r);
   position: relative;
   #watch_video {
     position: absolute;
     top: -23px;
-    @include l.center-abs-el;
-    background-color: l.$red;
-    color: l.$white;
-    @include l.border-radius(l.$btn-b-r);
+    @include center-abs($horizontal: true);
+    background-color: $red;
+    color: $white;
+    @include border-radius($btn-b-r);
     padding: 0.3rem 0.6rem;
     font-weight: 600;
     display: flex;
@@ -43,7 +43,7 @@ $iconWidth: 100px;
 }
 
 .about {
-  margin: l.$su * 2 0;
+  margin: $su * 2 0;
   text-align: center;
   .text {
     margin: auto;
@@ -51,7 +51,7 @@ $iconWidth: 100px;
     max-width: 600px;
   }
   a {
-    color: l.$red;
+    color: $red;
     font-weight: 400;
     font-size: 18px;
   }
@@ -61,7 +61,7 @@ $iconWidth: 100px;
 3. PRINCIPLES (usps) 
 ---------------------- */
 .usps_wrapper {
-  padding: l.$su * 5 0;
+  padding: $su * 5 0;
   // Makes sure that content of row lays on top of overlay
   z-index: 1;
 
@@ -70,7 +70,7 @@ $iconWidth: 100px;
     max-width: 900px;
     margin: auto;
     position: unset;
-    padding: 0 l.$su * 1;
+    padding: 0 $su * 1;
   }
 }
 
@@ -80,10 +80,10 @@ $iconWidth: 100px;
   overflow-x: hidden;
   width: 100%;
   li {
-    color: l.$white;
+    color: $white;
     font-size: 18px;
     a {
-      color: l.$red;
+      color: $red;
       font-weight: 600;
       font-size: 20px;
     }
@@ -103,9 +103,9 @@ $iconWidth: 100px;
   .icons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    padding: l.$su;
-    margin-top: -2.5 * l.$su;
-    background-color: l.$white;
+    padding: $su;
+    margin-top: -2.5 * $su;
+    background-color: $white;
     z-index: 1;
 
     /* ICON styles */
@@ -118,50 +118,33 @@ $iconWidth: 100px;
         margin: auto;
       }
       .text {
-        color: l.$red;
+        color: $red;
         font-weight: 600;
         font-size: 20px;
       }
 
       &.active {
-        transform: none;
-        -webkit-transform: none;
-        -moz-transform: none;
-        -ms-transform: none;
-        -o-transform: none;
+        @include transform(none);
         opacity: 1;
       }
       /* Inactive styles */
-      transform: scale(0.7);
-      -webkit-transform: scale(0.7);
-      -moz-transform: scale(0.7);
-      -ms-transform: scale(0.7);
-      -o-transform: scale(0.7);
+      @include transform(scale(0.7));
       transform-origin: center center;
       opacity: 0.6;
-
-      /* Avoid text shifting during transition */
+      /*Avoidtextshiftingduringtransition*/
       -webkit-font-smoothing: antialised;
       backface-visibility: hidden;
-
-      transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-      -webkit-transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-      -moz-transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-      -ms-transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-      -o-transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+      @include transition(transform 0.2s ease-out, opacity 0.2s ease-out);
     }
   }
 
   /* Add some whitespace between start footer and this section */
-  padding-bottom: l.$su * 3;
+  padding-bottom: $su * 3;
 }
 
 @media (max-width: 550px) {
   .hero .hero_inner {
-    padding: l.$su * 2.5 0 l.$su * 1.5 0;
-  }
-  .persons {
-    display: none;
+    padding: $su * 2.5 0 $su * 1.5 0;
   }
 
   .usps_wrapper {

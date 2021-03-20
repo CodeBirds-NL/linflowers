@@ -10,10 +10,10 @@ import Persons from "../components/persons"
 import Form from "../components/form"
 import Arrow from "../components/slider/Arrow"
 import useKeyPress from "../components/utils/hooks/useKeyPress"
+import Spacer from "../components/spacer"
 
 import c from "./contact.module.scss"
 import "keen-slider/keen-slider.min.css"
-import Spacer from "../components/spacer"
 
 const ContactTemplate = ({ pageContext, data }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -53,6 +53,7 @@ const ContactTemplate = ({ pageContext, data }) => {
         data={{ ...pageContext, title, featured_media }}
       >
         <Persons
+          customClass="contact"
           role={true}
           showNumber={true}
           label={false}
@@ -63,12 +64,10 @@ const ContactTemplate = ({ pageContext, data }) => {
         <div className={c.grid}>
           <div className={c.grid__left}>
             <div className={[c.iconWrapper].join(" ")}>
-              {/* <div className={c.circle}> */}
               <Img
                 className={c.image}
                 fluid={featured_action.image.localFile.childImageSharp.fluid}
               />
-              {/* </div> */}
             </div>
             <div className={c.textContent}>
               <strong>{featured_action.title}</strong>
@@ -79,7 +78,10 @@ const ContactTemplate = ({ pageContext, data }) => {
             {actions.map(action => (
               <Link key={action.title} to={action.url}>
                 <div className={c.iconWrapper}>
-                  <Img fluid={action.image.localFile.childImageSharp.fluid} />
+                  <Img
+                    className={c.image}
+                    fluid={action.image.localFile.childImageSharp.fluid}
+                  />
                 </div>
                 {action.title}
               </Link>
@@ -125,7 +127,6 @@ const ContactTemplate = ({ pageContext, data }) => {
           </div>
         </Row>
       </div>
-      <Spacer />
     </Layout>
   )
 }

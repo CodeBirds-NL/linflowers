@@ -37,6 +37,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "gh_pages": "gh-pages -d public",    
     "commit": "git add . && git commit -m",
     "deploy_gh": "gatsby build --prefix-paths && gh-pages -d public",
     "deploy": "git push -q && curl -X POST https://rebuilds.codebirds-apiserver.nl/linflowers && exit"

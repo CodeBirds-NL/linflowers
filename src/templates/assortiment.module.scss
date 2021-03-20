@@ -1,7 +1,7 @@
-@use './../components/layout/layout.module.scss' as l;
+@use './../styles/shared.scss' as *;
 
 .products {
-  @include l.grid(3);
+  @include grid(3);
   & > a:nth-child(3n + 2) {
     margin-top: 40%;
     margin-bottom: -40%;
@@ -12,9 +12,9 @@
   .product {
     text-align: center;
     .caption {
-      font-size: l.$su;
+      font-size: $su;
       text-transform: uppercase;
-      color: l.$antra;
+      color: $antra;
       font-weight: 400;
     }
   }
@@ -23,7 +23,7 @@
 @media (max-width: 550px) {
   .products {
     grid-template-columns: 1fr 1fr;
-    gap: l.$su;
+    gap: $su;
     & > a:nth-child(3n + 2) {
       margin-top: 0;
       margin-bottom: 0;

@@ -1,31 +1,32 @@
-@use './../components/layout/layout.module.scss' as l;
+@use "./../styles/shared.scss" as *;
 @use './index.module.scss' as i;
 
+$soft_rose: rgb(238, 217, 215);
+
 .actions {
-  background-color: rgba($color: l.$red, $alpha: 0.2);
+  background-color: $soft_rose;
   .grid {
-    max-width: l.$heroMaxWidth;
-    display: grid;
+    max-width: $heroMaxWidth;
+    @include grid(2fr 1fr);
     margin: auto;
-    padding: l.$su l.$su * 4;
-    grid-template-columns: 2fr 1fr;
+    padding: $su $su * 4;
 
     /* Text styles */
-    color: l.$red;
+    color: $red;
     strong {
-      font-size: l.$su;
-      margin-bottom: l.$su * 0.25;
+      font-size: $su;
+      margin-bottom: $su * 0.25;
       display: inline-block;
     }
     &__left {
       display: flex;
       .iconWrapper {
         display: flex;
-        margin-right: l.$su;
+        margin-right: $su;
         height: 120px;
         width: 120px;
-        border: 3px solid l.$red;
-        @include l.border-radius(50%);
+        border: 3px solid $red;
+        @include border-radius(50%);
         .image {
           width: 50%;
           margin: auto;
@@ -44,9 +45,9 @@
       a {
         display: flex;
         align-items: center;
-        padding-bottom: l.$su * 0.5;
+        padding-bottom: $su * 0.5;
         .iconWrapper {
-          margin-right: l.$su;
+          margin-right: $su;
           width: 40px;
           height: 40px;
         }
@@ -57,9 +58,9 @@
 
 .form_row {
   .inner {
-    max-width: l.$heroMaxWidth;
+    max-width: $heroMaxWidth;
     margin: auto;
-    padding: l.$su * 4;
+    padding: $su * 4;
     .title {
       text-transform: uppercase;
       font-weight: 400;
@@ -69,19 +70,21 @@
 }
 
 .sliderContainer {
-  background-color: l.$white;
+  background-color: $white;
   position: relative;
+  padding-bottom: $su * 4;
   .imageWrapper {
     // Make background image take up height of content (sibling)
     position: absolute;
-    top: 0;
+    top: 50%;
+    @include transform(translateY(-50%));
     width: 100%;
     height: auto;
     z-index: -1;
     &::before {
       // Overlay for background image
       content: "";
-      background-color: rgba($color: l.$black, $alpha: 0.8);
+      background-color: rgba($color: $black, $alpha: 0.55);
       width: 100%;
       height: 100%;
       z-index: 2;
@@ -90,9 +93,9 @@
     }
   }
   .content {
-    max-width: l.$heroMaxWidth;
+    max-width: $heroMaxWidth;
     margin: auto;
-    padding: l.$su * 5 l.$su * 4;
+    padding: $su * 5 $su * 4;
   }
 }
 
@@ -101,19 +104,103 @@
   position: absolute;
   width: 100%;
   top: 50%;
-  transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
+  @include transform(translateY(-50%));
   .inner {
     // reference point for absolute positioned arrows as parent is already absolute positined
     position: relative;
   }
 }
 
-.spacer {
-  /* Don't like the footer so close to me :) */
-  height: l.$su * 4;
-  background-color: l.$white;
+@media (max-width: 750px) {
+  $iconWidth: 100px;
+
+  /* ---------------------
+  1. ACTIONS MOBILE STYLES 
+  --------------------- */
+  .actions {
+    .grid {
+      position: relative;
+      z-index: 1;
+      &::before {
+        content: "";
+        position: absolute;
+        left: ($iconWidth / 2) - 2px;
+        height: 100%;
+        width: 5px;
+        z-index: -1;
+        border-right: 4px dashed $red;
+      }
+      grid-template-columns: 1fr;
+      padding: $su * 1.5 0;
+      &__left {
+        @include grid(0.4fr 0.6fr);
+        .iconWrapper {
+          width: $iconWidth;
+          height: $iconWidth;
+          // Same t/b margin as padding of items below
+          margin: 20px 0;
+          background-color: $soft_rose;
+        }
+      }
+
+      &__right {
+        flex-direction: column;
+        a {
+          // Align other two actions in same way as primary action
+          @include grid(0.4fr 0.6fr);
+          padding-bottom: $su;
+          font-size: 20px;
+          font-weight: bold;
+          .iconWrapper {
+            display: flex;
+            width: $iconWidth;
+            height: $iconWidth;
+            margin-right: 0;
+            border: 3px solid $red;
+            background-color: $soft_rose;
+            @include border-radius(50%);
+            .image {
+              width: 50%;
+              margin: auto;
+            }
+          }
+          &:last-of-type {
+            padding-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  /* ---------------------
+  1. FORM + SLIDER MOBILE STYLES 
+  --------------------- */
+  .form_row .inner {
+    padding: $su * 3 0 $su 0;
+    .title {
+      font-size: 26px;
+    }
+  }
+
+  .sliderContainer {
+    margin: 0;
+    padding-bottom: $su;
+    .content {
+      padding: $su * 2;
+      h2 {
+        margin-bottom: $su;
+      }
+      div {
+        & > p + p {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .spacer {
+    /* Don't like the footer so close to me :) */
+    height: $su * 4;
+    background-color: $white;
+  }
 }

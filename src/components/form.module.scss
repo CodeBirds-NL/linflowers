@@ -1,23 +1,23 @@
-@use './../components/layout/layout.module.scss' as l;
+@use './../styles/shared.scss' as *;
 
 .form {
   width: 100%;
   .form_group {
     display: inline-block;
     position: relative;
-    margin-bottom: l.$su;
+    margin-bottom: $su;
     width: 100%;
 
     /* This handles the padding if two boxes are 50% */
     & + .w50 {
-      padding-right: l.$su;
+      padding-right: $su;
     }
 
     &.w50 {
       width: 50%;
       & + .w50 {
         padding-right: 0;
-        padding-left: l.$su;
+        padding-left: $su;
       }
     }
 
@@ -26,27 +26,23 @@
       font-size: 20px;
       width: 100%;
       border: 0;
-      border: 3px solid l.$gray;
+      border: 3px solid $gray;
       padding: 5px 10px;
       line-height: 1.5em;
       background-color: transparent;
       &:focus {
-        border-color: l.$red;
+        border-color: $red;
         outline: 0;
       }
-      @include l.border-radius(l.$btn-b-r);
-      transition: border-color 0.25s ease-out;
-      -webkit-transition: border-color 0.25s ease-out;
-      -moz-transition: border-color 0.25s ease-out;
-      -ms-transition: border-color 0.25s ease-out;
-      -o-transition: border-color 0.25s ease-out;
+      @include border-radius($btn-b-r);
+      @include transition(border-color 0.25s ease-out);
     }
   }
 }
 
 .message {
   padding: 0 0 1.45rem 34px;
-  color: l.$black;
+  color: $black;
   font-size: 16px;
   position: relative;
   display: none;
@@ -55,15 +51,11 @@
     position: absolute;
     top: -10px;
     left: 10px;
-    transform: rotate(45deg);
+    @include transform(rotate(45deg));
     height: 24px;
     width: 12px;
-    border-bottom: 3px solid l.$red;
-    border-right: 3px solid l.$red;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
+    border-bottom: 3px solid $red;
+    border-right: 3px solid $red;
   }
   &.success {
     display: block;
@@ -72,8 +64,17 @@
 
 .consent {
   margin-top: 1rem;
-  color: l.$black;
+  color: $black;
   a {
-    color: l.$red;
+    color: $red;
+  }
+}
+
+@media (max-width: 910px) {
+  .form .form_group.w50 {
+    padding-right: $su * 0.5;
+    & + .w50 {
+      padding-left: $su * 0.5;
+    }
   }
 }

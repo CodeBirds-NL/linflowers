@@ -12,7 +12,7 @@ const Persons = ({
   role = false,
 }) => {
   return (
-    <div className={[p.persons, customClass].join(" ")}>
+    <div className={[p.persons, p[customClass]].join(" ")}>
       {persons.map(({ title, url, image, function: func }) => (
         <a href={`tel:${url}`} key={image.id} className={p.box}>
           <div className={p.imageWrapper}>
@@ -23,7 +23,7 @@ const Persons = ({
             <div>
               <div>{title}</div>
               {role && <em>{func}</em>}
-              <div>{url}</div>
+              <div className={p.url}>{url}</div>
             </div>
           )}
         </a>

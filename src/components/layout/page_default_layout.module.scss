@@ -1,4 +1,4 @@
-@use './layout.module.scss' as l;
+@use './../../styles/shared.scss' as *;
 
 .hero {
   min-height: 50vh;
@@ -7,22 +7,22 @@
 .contentWrapper {
   margin: auto;
   max-width: 900px;
-  background-color: l.$white;
-  padding: l.$su l.$su * 4;
+  background-color: $white;
+  padding: $su $su * 4;
   margin-top: -100px;
   margin-bottom: 100px;
   &.break_out {
     /* break out means that there's a succeeding row on the page with a custom full-width background */
     padding-bottom: 0;
-    margin-bottom: l.$su * 2;
+    margin-bottom: $su * 2;
   }
   h1 {
-    color: l.$red;
-    font-family: l.$body;
+    color: $red;
+    font-family: $body;
     text-transform: uppercase;
     font-weight: 400;
     font-size: 48px;
-    margin-bottom: l.$su * 2;
+    margin-bottom: $su * 2;
   }
 }
 
@@ -31,12 +31,12 @@
     min-height: calc(50vh - 80px);
   }
   .contentWrapper {
-    padding: l.$su 0;
+    padding: $su 0;
     margin-top: 0;
     margin-bottom: 0;
     h1 {
       font-size: 40px;
-      margin-bottom: l.$su * 1.5;
+      margin-bottom: $su * 1.5;
     }
   }
 }

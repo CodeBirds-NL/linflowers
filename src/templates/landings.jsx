@@ -13,20 +13,16 @@ import l from "./landings.module.scss"
  */
 const LandingsPage = ({ pageContext, data }) => {
   const { image, special_field, form } = data.wordpressPage.acf.landings_page
-  const products = data.allWordpressWpProducts.nodes
+  const products = data.allWordpressWpProducts.nodes.map(el => [
+    el.acf.product.title.toLowerCase().replaceAll(" ", "_"),
+    el.acf.product.title,
+  ])
 
   const [allValues, setAllValues] = useState({})
 
   const handleInput = (evt, title, type) => {
-    title = title.toLowerCase().replaceAll(" ", "_")
-
     // Reject input update when quantity is below 0
-    /**
-     * @todo Instead of modifying input value directly on object, let value inherit from state
-     */
-    if (type === "number" && parseInt(evt.target.value) < 0) {
-      return (evt.target.value = 0)
-    }
+    if (type === "number" && parseInt(evt.target.value) < 0) return
     setAllValues({
       ...allValues,
       [title]: type === "checkbox" ? evt.target.checked : evt.target.value,
@@ -36,20 +32,25 @@ const LandingsPage = ({ pageContext, data }) => {
   return (
     <PageDefaultLayout data={{ ...pageContext, title: form.title, image }}>
       <div className={l.products}>
-        {products.map(({ acf }) => (
-          <div className={l.form_group} key={acf.product.title}>
+        {products.map(([title, label]) => (
+          <div className={l.form_group} key={title}>
             <input
-              name={acf.product.title}
-              id={acf.product.title}
+              name={title}
+              id={title}
               type={special_field === "checkbox" ? "checkbox" : "number"}
-              onInput={e => handleInput(e, acf.product.title, special_field)}
+              onChange={e => handleInput(e, title, special_field)}
+              value={allValues[title] || ""}
               placeholder={special_field && "0 stelen"}
             />
-            <label htmlFor={acf.product.title}>{acf.product.title}</label>
+            <label htmlFor={title}>{label}</label>
           </div>
         ))}
       </div>
-      <Form {...form} productValues={allValues} />
+      <Form
+        {...form}
+        productValues={allValues}
+        resetHandler={() => (setAllValues = {})}
+      />
     </PageDefaultLayout>
   )
 }

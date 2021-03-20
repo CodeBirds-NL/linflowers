@@ -1,27 +1,54 @@
-@use './../components/layout/layout.module.scss' as l;
+@use './../styles/shared.scss' as *;
 
 .posts {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: l.$su * 2;
+  @include grid(1, $su * 2);
   .post {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    gap: l.$su;
+    @include grid(40% 60%, $su);
     &__content {
       h4 {
-        color: l.$black;
-        font-size: l.$su * 1.25;
+        color: $black;
+        font-size: $su * 1.25;
         font-weight: bold;
       }
       p {
-        color: l.$antra;
+        color: $antra;
         margin-bottom: 0;
       }
       a {
-        color: l.$red;
+        color: $red;
         // font-weight: bold;
       }
     }
+  }
+}
+
+/* ---------------------------
+POST SINGLE STYLES
+----------------------------- */
+.post_content {
+  margin-top: $su * 1.5;
+}
+
+@media (max-width: 650px) {
+  .posts .post {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+    .image {
+      width: 100%;
+      border-top-left-radius: $block-b-r;
+      border-top-right-radius: $block-b-r;
+    }
+    background: white;
+    @include border-radius($block-b-r);
+    &__content {
+      padding: $su;
+    }
+  }
+
+  .post_image {
+    display: none;
+  }
+  .post_content {
+    margin-top: 0;
   }
 }

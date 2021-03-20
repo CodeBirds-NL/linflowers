@@ -19,6 +19,16 @@
   /* Contact page specific page */
 }
 
+@media (max-width: 550px) {
+  .arrow {
+    width: 30px;
+    margin-left: 10px;
+    &.right {
+      margin-left: 0;
+      margin-right: 10px;
+    }
+  }
+}
 @media (max-width: 380px) {
   .arrow {
     display: none;

@@ -1,0 +1,62 @@
+/* COLORS */
+$red: #ac423d;
+$antra: #4b4550;
+$gray: #9daab0;
+$white: #f9f4f0;
+$black: #383838;
+
+$btn-b-r: 3px;
+$block-b-r: 12px;
+
+/* Typography */
+$headings: "Lucida Bright";
+$body: "Lato";
+
+/* Sizing unit */
+$su: 20px;
+$heroMaxWidth: 900px;
+
+@mixin grid($cols: 0, $gap: 0) {
+  display: grid;
+  @if type-of($cols) == number {
+    grid-template-columns: repeat($cols, 1fr);
+  } @else {
+    grid-template-columns: $cols;
+  }
+  gap: $gap;
+}
+
+@mixin transform($fn) {
+  transform: $fn;
+  -webkit-transform: $fn;
+  -moz-transform: $fn;
+  -ms-transform: $fn;
+  -o-transform: $fn;
+}
+
+@mixin border-radius($rad: 0%) {
+  border-radius: $rad;
+  -webkit-border-radius: $rad;
+  -moz-border-radius: $rad;
+  -ms-border-radius: $rad;
+  -o-border-radius: $rad;
+}
+
+// In case we pass multiple transition properties, comma separated
+@mixin transition($props...) {
+  transition: $props;
+  -webkit-transition: $props;
+  -moz-transition: $props;
+  -ms-transition: $props;
+  -o-transition: $props;
+}
+
+@mixin center-abs($horizontal: false) {
+  @if $horizontal {
+    left: 50%;
+    @include transform(translateX(-50%));
+  } @else {
+    top: 50%;
+    @include transform(translateY(-50%));
+  }
+}

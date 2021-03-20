@@ -16,6 +16,7 @@ const PostsArchive = ({ pageContext, data }) => {
           <div className={p.post} key={post.slug}>
             {post.featured_media && (
               <Img
+                className={p.image}
                 fluid={post.featured_media.localFile.childImageSharp.fluid}
               />
             )}

@@ -58,7 +58,7 @@ const IndexTemplate = ({ data }) => {
         </div>
       </Row>
       <Row>
-        <Persons persons={acf.home.about.persons} customClass={i.persons} />
+        <Persons persons={acf.home.about.persons} customClass="home" />
         <div className={i.about}>
           <div
             className={i.text}
