@@ -13,10 +13,12 @@ const PostSingle = ({ pageContext, data }) => {
     <PageDefaultLayout
       data={{ ...pageContext, title: acf.post.title, featured_media }}
     >
-      <Img
-        className={p.post_image}
-        fluid={featured_media.localFile.childImageSharp.fluid}
-      />
+      {featured_media && (
+        <Img
+          className={p.post_image}
+          fluid={featured_media.localFile.childImageSharp.fluid}
+        />
+      )}
       <div
         className={p.post_content}
         dangerouslySetInnerHTML={{ __html: content }}

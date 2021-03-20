@@ -14,7 +14,7 @@ import l from "./landings.module.scss"
 const LandingsPage = ({ pageContext, data }) => {
   const { image, special_field, form } = data.wordpressPage.acf.landings_page
   const products = data.allWordpressWpProducts.nodes.map(el => [
-    el.acf.product.title.toLowerCase().replaceAll(" ", "_"),
+    el.acf.product.title.toLowerCase().replace(/" "/g, "_"),
     el.acf.product.title,
   ])
 
