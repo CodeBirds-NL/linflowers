@@ -3,6 +3,10 @@
 .persons {
   @include grid(3);
   max-width: $heroMaxWidth;
+  &.home {
+    margin: auto;
+    margin-top: -42px;
+  }
   .box {
     text-align: center;
     color: $black;
