@@ -71,6 +71,13 @@ const Layout = ({ children, langCode }) => {
                 }
               }
             }
+            languages {
+              label
+              icon {
+                ...Pijler
+              }
+              lang_code
+            }
             footer {
               col_2 {
                 title

@@ -148,6 +148,7 @@ $iconWidth: 100px;
   }
 
   .usps_wrapper {
+    padding: $su * 2 0;
     & > div {
       max-width: 320px;
       position: relative;

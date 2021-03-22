@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { graphql, Link } from "gatsby"
+import { graphql, Link, navigate } from "gatsby"
 import { useKeenSlider } from "keen-slider/react"
 import Img from "gatsby-image"
 
@@ -16,8 +16,27 @@ import i from "./index.module.scss"
 import l from "../components/layout/layout.module.scss"
 import "keen-slider/keen-slider.min.css"
 
+const getBrowserLang = () => {
+  if (typeof navigator === "undefined") return "nl"
+
+  const langs = ["de", "en", "ru", "fr", "nl"]
+  const lang =
+    navigator && navigator.language && navigator.language.split("-")[0]
+  if (!langs.includes(lang)) return "en"
+  return lang
+}
+
 const IndexTemplate = ({ data }) => {
   const { title, lang_code, acf } = data.wordpressPage
+
+  useEffect(() => {
+    // Get browser language
+    const lang = getBrowserLang()
+    // Move if current language of website doesn't match browser language
+    if (lang !== lang_code) {
+      navigate(`/${lang === "nl" ? "" : lang}`, { replace: true })
+    }
+  }, [])
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [sliderRef, slider] = useKeenSlider({

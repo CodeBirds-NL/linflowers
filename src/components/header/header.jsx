@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 
@@ -15,6 +15,20 @@ const Header = ({ langCode, metaData, menuItems }) => {
   })[0].node
 
   const [mobileMenu, toggleMobileMenu] = useState(false)
+  const [langSelect, setLangSelect] = useState(false)
+
+  useEffect(() => {
+    if (!mobileMenu && langSelect) {
+      setLangSelect(false)
+    }
+  }, [mobileMenu])
+
+  /**
+   * Language Switcher Config
+   */
+  let langs = metaData.languages
+  const currentLanguage = langs.find(i => i.lang_code === langCode)
+  langs = langs.filter(i => i.lang_code !== currentLanguage.lang_code)
 
   return (
     <header className={h.header}>
@@ -48,6 +62,36 @@ const Header = ({ langCode, metaData, menuItems }) => {
                 </Link>
               </li>
             ))}
+            <li
+              onClick={() => setLangSelect(!langSelect)}
+              className={[
+                h.menu_item,
+                h.lang_select,
+                langSelect && h.active,
+              ].join(" ")}
+            >
+              <div className={h.current}>
+                <Img
+                  fluid={currentLanguage.icon.localFile.childImageSharp.fluid}
+                />
+                <span className={h.dd_icon}></span>
+              </div>
+              <ul>
+                {langs.map(lang => (
+                  <li key={lang.lang_code}>
+                    <Link
+                      to={`/${lang.lang_code === "nl" ? "" : lang.lang_code}`}
+                    >
+                      <Img
+                        className={h.flag}
+                        fluid={lang.icon.localFile.childImageSharp.fluid}
+                      />
+                      {lang.lang_code}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
           </ul>
         </nav>
       </Row>

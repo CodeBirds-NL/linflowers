@@ -117,10 +117,11 @@
     li.menu_item {
       margin-right: 1rem;
       margin-bottom: 0;
+      width: fit-content;
       &:last-child {
         margin-right: 0;
       }
-      &:hover a {
+      &:hover > a {
         color: $red;
       }
     }
@@ -154,6 +155,93 @@
   }
 }
 
+.lang_select {
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  .current {
+    @include grid(30px auto, 5px);
+    align-items: center;
+
+    /* DROP-DOWN icon styles */
+    .dd_icon {
+      width: 32px;
+      height: 30px;
+      display: block;
+      position: relative;
+      @include transition(transform 0.25s ease-in-out);
+      &::before,
+      &::after {
+        width: 50%;
+        height: 3px;
+        background-color: $antra;
+        content: "";
+        position: absolute;
+        bottom: 8px;
+      }
+      &:hover {
+        &::before,
+        &::after {
+          background-color: $red;
+        }
+      }
+      &::after {
+        left: 50%;
+        @include transform(rotate(-45deg));
+        transform-origin: left bottom;
+        border-top-right-radius: $block-b-r;
+        border-bottom-right-radius: $block-b-r;
+      }
+      &::before {
+        @include transform(rotate(45deg));
+        transform-origin: right bottom;
+        border-top-left-radius: $block-b-r;
+        border-bottom-left-radius: $block-b-r;
+      }
+    }
+  }
+  &.active .current .dd_icon {
+    @include transform(rotate(-180deg));
+  }
+  ul {
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1;
+    margin: 0;
+    position: absolute;
+    left: -10px;
+    width: calc(100% + 20px);
+    top: 100%;
+    padding-bottom: 10px;
+    background-color: $white;
+    box-shadow: 0px 10px 25px 0 rgba($color: $black, $alpha: 0.1);
+    @include border-radius($block-b-r);
+    li {
+      padding-top: 5px;
+      margin-left: 10px;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      color: $antra;
+      &:hover a {
+        color: $red;
+      }
+      a {
+        display: flex;
+        align-items: center;
+      }
+      .flag {
+        width: 30px;
+        margin-right: 10px;
+      }
+    }
+  }
+  &.active ul {
+    visibility: visible;
+    opacity: 1;
+    @include transition(visibility 0s 0s, opacity 0.2s ease-out);
+  }
+}
+
 @media (max-width: 600px) {
   /* Topbar mobile styles */
   .topbar_row {
@@ -171,6 +259,10 @@
     &.toggled {
       display: flex;
     }
+    ul.menu_items {
+      width: 100%;
+      position: relative;
+    }
   }
 
   .upper {
@@ -187,6 +279,20 @@
     // Toggle button is normally hidden with display: none;
     .toggle {
       display: flex;
+    }
+  }
+
+  /* LANG Switch mobile styles */
+  .lang_select {
+    position: absolute;
+    top: 26px;
+    @include transform(translateY(-13px));
+    right: 0;
+    ul {
+      margin-top: 10px;
+      font-weight: 400;
+      font-size: 20px;
+      box-shadow: 0px 5px 20px 0 rgba($color: $black, $alpha: 0.1);
     }
   }
 }
