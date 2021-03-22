@@ -206,14 +206,18 @@ exports.createPages = async ({ graphql, actions }) => {
        */
       let langSlug = i.lang_code === "nl" ? "" : i.lang_code
 
-      /* Mimic parent slug behaviour by abusing language slug for single product pages*/
-      /**
-       * @todo get parent slug in right language!
-       */
+      /* Mimic parent slug behaviour by appending parent slug to lang slug for singles*/
       if (templateName === "product") {
-        langSlug += "/assortiment"
+        const parent = assortimentResult.data.allWordpressPage.edges.find(
+          ({ node: p }) => p.lang_code === i.lang_code
+        )
+        langSlug += `/${parent.node.slug}`
       } else if (templateName === "post") {
-        langSlug += "/laatste-nieuws"
+        // Get parent slug
+        const parent = postsArchiveResult.data.allWordpressPage.edges.find(
+          ({ node: p }) => p.lang_code === i.lang_code
+        )
+        langSlug += `/${parent.node.slug}`
       }
 
       createPage({

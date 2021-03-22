@@ -32,7 +32,29 @@ const Layout = ({ children, langCode }) => {
       wordpressSiteMetadata {
         url
       }
-      wordpressPage(slug: { eq: "header-footer" }) {
+      allWordpressPage(filter: { template: { eq: "footer.php" } }) {
+        edges {
+          node {
+            lang_code
+            acf {
+              footer {
+                col_2 {
+                  title
+                  wordpress_fields {
+                    left
+                    right
+                  }
+                }
+                col_3 {
+                  title
+                  contact_details
+                }
+              }
+            }
+          }
+        }
+      }
+      wordpressPage(slug: { eq: "header" }) {
         acf {
           header_footer {
             site_description
@@ -78,19 +100,6 @@ const Layout = ({ children, langCode }) => {
               }
               lang_code
             }
-            footer {
-              col_2 {
-                title
-                wordpress_fields {
-                  left
-                  right
-                }
-              }
-              col_3 {
-                title
-                contact_details
-              }
-            }
           }
         }
       }
@@ -116,6 +125,13 @@ const Layout = ({ children, langCode }) => {
     return menu
   })
 
+  /**
+   * Get language based footer content
+   */
+  const footerData = data.allWordpressPage.edges.find(
+    ({ node }) => node.lang_code === langCode
+  ).node
+
   return (
     <>
       <Header
@@ -127,7 +143,7 @@ const Layout = ({ children, langCode }) => {
       <Footer
         langCode={langCode}
         menuItems={menus}
-        data={{ ...data.wordpressPage.acf.header_footer.footer }}
+        data={{ ...footerData.acf.footer }}
         logo={data.wordpressPage.acf.header_footer.site_logo}
       />
     </>

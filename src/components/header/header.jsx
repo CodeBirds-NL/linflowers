@@ -51,8 +51,8 @@ const Header = ({ langCode, metaData, menuItems }) => {
       <Row>
         <nav className={[h.menu, mobileMenu && h.toggled].join(" ")}>
           <ul className={h.menu_items}>
-            {selectedMenu.items.map(({ url, title }) => (
-              <li className={h.menu_item} key={title}>
+            {selectedMenu.items.map(({ url, title }, i) => (
+              <li className={h.menu_item} key={`${i}${title}`}>
                 <Link
                   to={`${langCode === "nl" ? "" : `/${langCode}`}${
                     url === "/nl/" || url === null ? "/" : url

@@ -27,16 +27,16 @@ const getBrowserLang = () => {
 }
 
 const IndexTemplate = ({ data }) => {
-  const { title, lang_code, acf } = data.wordpressPage
+  const { lang_code, acf } = data.wordpressPage
 
-  useEffect(() => {
-    // Get browser language
-    const lang = getBrowserLang()
-    // Move if current language of website doesn't match browser language
-    if (lang !== lang_code) {
-      navigate(`/${lang === "nl" ? "" : lang}`, { replace: true })
-    }
-  }, [])
+  // useEffect(() => {
+  //   // Get browser language
+  //   const lang = getBrowserLang()
+  //   // Move if current language of website doesn't match browser language
+  //   if (lang !== lang_code && process.env.NODE_ENV !== "development") {
+  //     navigate(`/${lang === "nl" ? "" : lang}`, { replace: true })
+  //   }
+  // }, [])
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [sliderRef, slider] = useKeenSlider({
@@ -60,7 +60,7 @@ const IndexTemplate = ({ data }) => {
 
   return (
     <Layout langCode={lang_code}>
-      <SEO title={title} />
+      <SEO title={acf.home.title} />
       <Row
         customClass={i.hero}
         backgroundImage={acf.home.hero.background_image}
@@ -151,6 +151,7 @@ export const data = graphql`
       lang_code
       acf {
         home {
+          title
           hero {
             background_image {
               ...Background
