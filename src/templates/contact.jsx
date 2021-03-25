@@ -16,13 +16,9 @@ import c from "./contact.module.scss"
 import "keen-slider/keen-slider.min.css"
 
 const ContactTemplate = ({ pageContext, data }) => {
-  const [currentSlide, setCurrentSlide] = useState(0)
   const [sliderRef, slider] = useKeenSlider({
     initial: 0,
     loop: true,
-    slideChanged(s) {
-      setCurrentSlide(s.details().relativeSlide)
-    },
   })
 
   const right = useKeyPress(39)
@@ -92,7 +88,7 @@ const ContactTemplate = ({ pageContext, data }) => {
       <Row customClass={c.form_row}>
         <div className={c.inner}>
           <h4 className={c.title}>{form.title}</h4>
-          <Form {...form} />
+          <Form src="contact" {...form} />
         </div>
       </Row>
       <div className={c.sliderContainer}>

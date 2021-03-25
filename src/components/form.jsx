@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { Link } from "gatsby"
 
 import f from "./form.module.scss"
 import l from "./../components/layout/layout.module.scss"
@@ -9,6 +9,7 @@ const Form = ({
   label,
   productValues = "",
   resetHandler = "",
+  src = "",
 }) => {
   const [formEntries, saveFormEntries] = useState({})
   const [formSent, setFormSent] = useState(false)
@@ -16,17 +17,7 @@ const Form = ({
 
   const formRef = useRef()
 
-  const { url } = useStaticQuery(
-    graphql`
-      query {
-        wordpressSiteMetadata {
-          url
-        }
-      }
-    `
-  ).wordpressSiteMetadata
-
-  const api = `${url}/wp-content/uploads/mailer/index.php`
+  const api = process.env.FORM_API
 
   const handleFormEntry = e => {
     saveFormEntries({
@@ -38,28 +29,35 @@ const Form = ({
   const handleSubmit = e => {
     e.preventDefault()
 
-    const formData = new FormData()
+    const formData = {}
 
     // Product values if present
     if (productValues) {
-      return console.log(productValues)
+      formData["products"] = productValues
     }
 
     // Add form entries
     const sanitize = str => {
       // this regex selects all characters except [a-z] and [0-9] and _
       let regex0 = RegExp(/[^a-z|_|0-9]/, "gi")
-      return str.replace(" ", "_").replace(regex0, "")
+      return str.split(" ").join("_").replace(regex0, "")
     }
 
     for (const [key, value] of Object.entries(formEntries)) {
-      formData.append(sanitize(key), value)
+      formData[sanitize(key)] = value
     }
+
+    // Add source page
+    formData["source"] = src
 
     setFormIsProcessing(true)
     fetch(api, {
       method: "POST",
-      body: formData,
+      body: JSON.stringify(formData),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
     })
       .then(response => response.json())
       .then(data => {
