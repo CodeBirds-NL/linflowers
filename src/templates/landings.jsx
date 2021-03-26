@@ -50,7 +50,7 @@ const LandingsPage = ({ pageContext, data }) => {
         {...form}
         src={special_field === "checkbox" ? "proefbos" : "offerte"}
         productValues={allValues}
-        resetHandler={() => (setAllValues = {})}
+        resetHandler={() => setAllValues({})}
       />
     </PageDefaultLayout>
   )
