@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import l from "./layout/layout.module.scss"
 
 const Button = ({ data, color = "red", extraClasses = [] }) => {
-  if (data.link.charAt(0) === "/") {
+  if (data.link && data.link.charAt(0) === "/") {
     return (
       <Link
         to={data.link}
@@ -13,6 +13,8 @@ const Button = ({ data, color = "red", extraClasses = [] }) => {
         {data.label}
       </Link>
     )
+  } else {
+    return null
   }
 }
 
