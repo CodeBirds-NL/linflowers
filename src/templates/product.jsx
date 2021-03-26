@@ -44,6 +44,10 @@ const ProductTemplate = ({ pageContext, data }) => {
 
   const { actions } = data.wordpressPage.acf.products_archive
 
+  // Get parent slugs in all languages for direct language switch functionality in header
+  const parentSlugs = data.wordpressPage.polylang_translations
+  pageContext["parentSlugTranslations"] = parentSlugs
+
   return (
     <Layout pageContext={pageContext}>
       <PageDefaultLayout
@@ -133,6 +137,10 @@ export const data = graphql`
       template: { eq: "assortiment.php" }
       lang_code: { eq: $lang_code }
     ) {
+      polylang_translations {
+        lang_code
+        slug
+      }
       acf {
         products_archive {
           actions {

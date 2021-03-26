@@ -143,7 +143,14 @@ const Layout = ({ children, pageContext }) => {
    */
   const langsToSlugs = {}
   translations.forEach(t => {
-    langsToSlugs[t.lang_code] = t.slug
+    let parentSlug = ""
+    // This will check whether we have translated parentSlug (in case of product and post single pages)
+    if (pageContext.hasOwnProperty("parentSlugTranslations")) {
+      parentSlug = pageContext.parentSlugTranslations.find(
+        pt => pt.lang_code === t.lang_code
+      ).slug
+    }
+    langsToSlugs[t.lang_code] = parentSlug ? `${parentSlug}/${t.slug}` : t.slug
   })
 
   return (

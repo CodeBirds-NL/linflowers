@@ -36,6 +36,18 @@ const Header = ({
   const currentLanguage = langs.find(i => i.lang_code === langCode)
   langs = langs.filter(i => i.lang_code !== currentLanguage.lang_code)
 
+  const getSlug = lang => {
+    if (indexPage) return ""
+
+    // Does there exist a matching page in the specified language?
+    if (langSlugMappings.hasOwnProperty(lang)) {
+      return langSlugMappings[lang]
+    } else {
+      // If page doesn't exist we redirect to homepage (default)
+      return ""
+    }
+  }
+
   return (
     <header className={h.header}>
       <TopBar data={metaData.topbar} />
@@ -86,7 +98,9 @@ const Header = ({
                 {langs.map(lang => (
                   <li key={lang.lang_code}>
                     <Link
-                      to={`/${lang.lang_code === "nl" ? "" : lang.lang_code}`}
+                      to={`${
+                        lang.lang_code === "nl" ? "" : "/" + lang.lang_code
+                      }/${getSlug(lang.lang_code)}`}
                     >
                       <Img
                         className={h.flag}
