@@ -14,7 +14,7 @@ import "./layout.css"
 import l from "./layout.module.scss"
 import Footer from "../footer/footer"
 
-const Layout = ({ children, langCode }) => {
+const Layout = ({ children, pageContext }) => {
   const data = useStaticQuery(graphql`
     query siteData {
       allWordpressMenusMenusItems {
@@ -106,6 +106,11 @@ const Layout = ({ children, langCode }) => {
     }
   `)
 
+  const {
+    lang_code: langCode,
+    polylang_translations: translations,
+  } = pageContext
+
   const formatMenuItemUrl = item => {
     let obj = { ...item }
     obj.url = obj.url.replace(wpSiteUrl, "")
@@ -132,12 +137,23 @@ const Layout = ({ children, langCode }) => {
     ({ node }) => node.lang_code === langCode
   ).node
 
+  /**
+   * Pass object with lang_codes mapped to their slugs to header
+   * Makes seamless language switching on any page possible without losing current navigation
+   */
+  const langsToSlugs = {}
+  translations.forEach(t => {
+    langsToSlugs[t.lang_code] = t.slug
+  })
+
   return (
     <>
       <Header
         langCode={langCode}
         menuItems={menus}
         metaData={data.wordpressPage.acf.header_footer}
+        langSlugMappings={langsToSlugs}
+        indexPage={pageContext.indexPage || false}
       />
       <main className={l.main}>{children}</main>
       <Footer
@@ -152,7 +168,7 @@ const Layout = ({ children, langCode }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  langCode: PropTypes.string.isRequired,
+  pageContext: PropTypes.object.isRequired,
 }
 
 export default Layout

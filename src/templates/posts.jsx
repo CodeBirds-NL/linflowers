@@ -7,7 +7,7 @@ import PageDefaultLayout from "../components/layout/PageDefaultLayout"
 import p from "./posts.module.scss"
 
 const PostsArchive = ({ pageContext, data }) => {
-  const { title, btn_label } = pageContext.acf.blog_archive
+  const { title, btn_label } = pageContext.acf?.blog_archive
 
   return (
     <PageDefaultLayout data={{ ...pageContext, title }}>

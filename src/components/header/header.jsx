@@ -7,7 +7,13 @@ import TopBar from "./topbar"
 
 import h from "./header.module.scss"
 
-const Header = ({ langCode, metaData, menuItems }) => {
+const Header = ({
+  langCode,
+  metaData,
+  menuItems,
+  langSlugMappings,
+  indexPage,
+}) => {
   // select right (language-specific) menu from query by comparing lang code present in menu name (FORM: Main Menu XX, where XX is the lanugage code) to lang code passed in props
   let selectedMenu = menuItems.filter(i => {
     const splittedMenuName = i.node.name.toLowerCase().split(" ")
@@ -29,6 +35,8 @@ const Header = ({ langCode, metaData, menuItems }) => {
   let langs = metaData.languages
   const currentLanguage = langs.find(i => i.lang_code === langCode)
   langs = langs.filter(i => i.lang_code !== currentLanguage.lang_code)
+
+  console.log(indexPage)
 
   return (
     <header className={h.header}>

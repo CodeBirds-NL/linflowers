@@ -45,7 +45,7 @@ const ProductTemplate = ({ pageContext, data }) => {
   const { actions } = data.wordpressPage.acf.products_archive
 
   return (
-    <Layout langCode={pageContext.lang_code}>
+    <Layout pageContext={pageContext}>
       <PageDefaultLayout
         breakOut={true}
         data={{ ...pageContext, title, image }}

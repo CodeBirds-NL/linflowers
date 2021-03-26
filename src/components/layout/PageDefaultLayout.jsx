@@ -8,7 +8,7 @@ import SEO from "../seo"
 
 const PageDefaultLayout = ({ data, children, breakOut = false }) => {
   return !breakOut ? (
-    <Layout langCode={data.lang_code}>
+    <Layout pageContext={data}>
       <SEO title={data.title} />
       <Row
         customClass={a.hero}

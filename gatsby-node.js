@@ -15,6 +15,10 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
             lang_code
             template
+            polylang_translations {
+              slug
+              lang_code
+            }
           }
         }
       }
@@ -31,6 +35,10 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
             lang_code
             template
+            polylang_translations {
+              slug
+              lang_code
+            }
           }
         }
       }
@@ -46,6 +54,10 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
             lang_code
             template
+            polylang_translations {
+              slug
+              lang_code
+            }
             featured_media {
               alt_text
               localFile {
@@ -80,6 +92,10 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
             lang_code
             template
+            polylang_translations {
+              slug
+              lang_code
+            }
             featured_media {
               alt_text
               localFile {
@@ -115,6 +131,10 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
             lang_code
             template
+            polylang_translations {
+              slug
+              lang_code
+            }
           }
         }
       }
@@ -130,6 +150,10 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
             lang_code
             template
+            polylang_translations {
+              slug
+              lang_code
+            }
           }
         }
       }
@@ -145,6 +169,10 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
             lang_code
             template
+            polylang_translations {
+              slug
+              lang_code
+            }
           }
         }
       }
@@ -160,6 +188,10 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
             lang_code
             template
+            polylang_translations {
+              slug
+              lang_code
+            }
           }
         }
       }

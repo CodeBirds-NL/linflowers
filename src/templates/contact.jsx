@@ -43,7 +43,7 @@ const ContactTemplate = ({ pageContext, data }) => {
   const { featured_media } = data.wordpressPage
 
   return (
-    <Layout langCode={pageContext.lang_code}>
+    <Layout pageContext={pageContext}>
       <PageDefaultLayout
         breakOut={true}
         data={{ ...pageContext, title, featured_media }}

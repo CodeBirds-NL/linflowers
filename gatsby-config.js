@@ -18,7 +18,6 @@ const dropUnusedMediaNormalizer = {
 }
 
 module.exports = {
-  pathPrefix: "/linflowers",
   siteMetadata: {
     title: `Linflowers Chrysanten`,
     description: `Partnership & Vakmanschap`,
