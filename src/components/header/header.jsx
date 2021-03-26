@@ -36,8 +36,6 @@ const Header = ({
   const currentLanguage = langs.find(i => i.lang_code === langCode)
   langs = langs.filter(i => i.lang_code !== currentLanguage.lang_code)
 
-  console.log(indexPage)
-
   return (
     <header className={h.header}>
       <TopBar data={metaData.topbar} />

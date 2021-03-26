@@ -3,12 +3,15 @@ import React from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 
-const NotFoundPage = () => (
-  <Layout langCode="en">
-    <SEO title="404: Not found" />
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Layout>
-)
+const NotFoundPage = () => {
+  const pageContext = { lang_code: "en", polylang_translations: [] }
+  return (
+    <Layout pageContext={pageContext}>
+      <SEO title="404: Not found" />
+      <h1>NOT FOUND</h1>
+      <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+    </Layout>
+  )
+}
 
 export default NotFoundPage
