@@ -1,3 +1,8 @@
+// Use Dotenv to make environment variables available at build time in this script
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 const generateFavicons = sizes => {
   return sizes.map(size => {
     return {
@@ -74,6 +79,15 @@ module.exports = {
         normalizers: normalizers => [dropUnusedMediaNormalizer, ...normalizers],
         concurrentRequests: 20,
         perPage: 50,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          process.env.GTAG, // Google Analytics / GA
+        ],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
