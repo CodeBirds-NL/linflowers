@@ -1,32 +1,30 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
 import PageDefaultLayout from "../components/layout/PageDefaultLayout"
 
 import p from "./posts.module.scss"
+import Slider from "../components/slider/slider"
 
 const PostSingle = ({ pageContext, data }) => {
   // Get parent slugs in all languages for direct language switch functionality in header
   const parentSlugs = data.wordpressPage.polylang_translations
   pageContext["parentSlugTranslations"] = parentSlugs
 
-  const { featured_media, content, acf, excerpt } = data.wordpressPost
+  const { featured_media, content, acf } = data.wordpressPost
+
+  const { gallery } = acf.post
 
   return (
     <PageDefaultLayout
       data={{ ...pageContext, title: acf.post.title, featured_media }}
     >
-      {featured_media && (
-        <Img
-          className={p.post_image}
-          fluid={featured_media.localFile.childImageSharp.fluid}
-        />
-      )}
       <div
         className={p.post_content}
         dangerouslySetInnerHTML={{ __html: content }}
       />
+      <Slider slides={gallery} />
     </PageDefaultLayout>
   )
 }
@@ -51,6 +49,9 @@ export const data = graphql`
       acf {
         post {
           title
+          gallery {
+            ...Background
+          }
         }
       }
     }

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { graphql, Link } from "gatsby"
-import { useKeenSlider } from "keen-slider/react"
 import Img from "gatsby-image"
 
 import Layout from "../components/layout/layout"
@@ -8,30 +7,11 @@ import PageDefaultLayout from "../components/layout/PageDefaultLayout"
 import Row from "../components/row"
 import Persons from "../components/persons"
 import Form from "../components/form"
-import Arrow from "../components/slider/Arrow"
-import useKeyPress from "../components/utils/hooks/useKeyPress"
-import Spacer from "../components/spacer"
+import Slider from "../components/slider/slider"
 
 import c from "./contact.module.scss"
-import "keen-slider/keen-slider.min.css"
 
 const ContactTemplate = ({ pageContext, data }) => {
-  const [sliderRef, slider] = useKeenSlider({
-    initial: 0,
-    loop: true,
-  })
-
-  const right = useKeyPress(39)
-  const left = useKeyPress(37)
-
-  useEffect(() => {
-    if (slider && left) slider.prev()
-  }, [left])
-
-  useEffect(() => {
-    if (slider && right) slider.next()
-  }, [right])
-
   const {
     title,
     persons,
@@ -91,38 +71,24 @@ const ContactTemplate = ({ pageContext, data }) => {
           <Form src="contact" {...form} />
         </div>
       </Row>
-      <div className={c.sliderContainer}>
-        <ul ref={sliderRef} className={c.slides}>
-          {locations.map((loc, i) => (
-            <li
-              className={`keen-slider__slide number-slide${i}`}
-              key={loc.title}
-            >
-              <div className={c.imageWrapper}>
-                <Img
-                  className={c.bgImage}
-                  fluid={loc.image.localFile.childImageSharp.fluid}
-                />
-              </div>
-              <div className={c.content}>
-                <h2>{loc.title}</h2>
-                <div dangerouslySetInnerHTML={{ __html: loc.text }} />
-                <a href={loc.url}>{loc.label}</a>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <Row customClass={c.arrow_wrapper}>
-          <div className={c.inner}>
-            <Arrow src="contact" clickHandler={() => slider.prev()} />
-            <Arrow
-              src="contact"
-              direction="right"
-              clickHandler={() => slider.next()}
-            />
-          </div>
-        </Row>
-      </div>
+      <Slider>
+        {locations.map((loc, i) => (
+          <li className={`keen-slider__slide number-slide${i}`} key={loc.title}>
+            <div className={c.imageWrapper}>
+              <Img
+                className={c.bgImage}
+                fluid={loc.image.localFile.childImageSharp.fluid}
+              />
+            </div>
+            <div className={c.content}>
+              <h2>{loc.title}</h2>
+              <div dangerouslySetInnerHTML={{ __html: loc.text }} />
+              <a href={loc.url}>{loc.label}</a>
+            </div>
+          </li>
+        ))}
+      </Slider>
+      <div className={c.spacer} />
     </Layout>
   )
 }
@@ -169,12 +135,15 @@ export const data = graphql`
           form {
             title
             label
+            label_active
             form_fields {
               width
               type
               required
               label
             }
+            privacy_notice
+            confirmation
           }
           locations {
             title

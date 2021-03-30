@@ -97,6 +97,30 @@ SPACER
   background-color: $white;
 }
 
+/* -------------
+NOTICE
+---------------- */
+.notice {
+  width: 100%;
+  background-color: $red;
+  @include border-radius($btn-b-r);
+  color: $white;
+  font-size: 18px;
+  padding: $su * 0.5;
+  padding-left: $su * 2;
+  margin-bottom: $su * 1.5;
+  position: relative;
+  &::before {
+    position: absolute;
+    left: 10px;
+    @include center-abs();
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: url("../../images/icons/info_icon.svg");
+  }
+}
+
 // iphone 5 styles
 @media (max-width: 330px) {
   .wrapper {

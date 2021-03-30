@@ -7,6 +7,9 @@ import l from "./../components/layout/layout.module.scss"
 const Form = ({
   form_fields,
   label,
+  label_active,
+  confirmation,
+  privacy_notice,
   productValues = "",
   resetHandler = "",
   src = "",
@@ -117,17 +120,15 @@ const Form = ({
         </div>
       ))}
       <div className={[f.message, formSent && f.success].join(" ")}>
-        Uw aanvraag werd successvol verstuurd!
+        {confirmation}
       </div>
       <button className={[l.btn, l.red].join(" ")}>
-        {formIsProcessing ? "Verwerken..." : label || "Verstuur"}
+        {formIsProcessing ? label_active : label || "Verstuur"}
       </button>
-      <div className={f.consent}>
-        <p>
-          Met het versturen van dit formulier gaat u akkoord met onze{" "}
-          <Link to="/privacyverklaring">privacyverklaring</Link>
-        </p>
-      </div>
+      <div
+        dangerouslySetInnerHTML={{ __html: privacy_notice }}
+        className={f.consent}
+      ></div>
     </form>
   )
 }

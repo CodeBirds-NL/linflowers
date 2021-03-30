@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 
 import PageDefaultLayout from "../components/layout/PageDefaultLayout"
 import Form from "../components/form"
+import Notice from "../components/notice"
 
 import l from "./landings.module.scss"
 
@@ -12,7 +13,12 @@ import l from "./landings.module.scss"
  * @param data contains results in-template Graphql query based on wordpress_id above
  */
 const LandingsPage = ({ pageContext, data }) => {
-  const { image, special_field, form } = data.wordpressPage.acf.landings_page
+  const {
+    offerte_placeholder = "",
+    proefbos_notice = "",
+    landings_page,
+  } = data.wordpressPage.acf
+  const { image, special_field, form } = landings_page
   const products = data.allWordpressWpProducts.nodes.map(el => [
     el.acf.product.title.toLowerCase().replace(/" "/g, "_"),
     el.acf.product.title,
@@ -40,12 +46,13 @@ const LandingsPage = ({ pageContext, data }) => {
               type={special_field === "checkbox" ? "checkbox" : "number"}
               onChange={e => handleInput(e, title, special_field)}
               value={allValues[title] || ""}
-              placeholder={special_field && "0 stelen"}
+              placeholder={special_field && offerte_placeholder}
             />
             <label htmlFor={title}>{label}</label>
           </div>
         ))}
       </div>
+      <Notice>{proefbos_notice}</Notice>
       <Form
         {...form}
         src={special_field === "checkbox" ? "proefbos" : "offerte"}
@@ -68,6 +75,8 @@ export const data = graphql`
   query LandinsPageQuery($wordpress_id: Int, $lang_code: String) {
     wordpressPage(wordpress_id: { eq: $wordpress_id }) {
       acf {
+        offerte_placeholder
+        proefbos_notice
         landings_page {
           special_field
           image {
@@ -76,12 +85,15 @@ export const data = graphql`
           form {
             title
             label
+            label_active
             form_fields {
               width
               type
               required
               label
             }
+            privacy_notice
+            confirmation
           }
         }
       }

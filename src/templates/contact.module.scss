@@ -1,5 +1,5 @@
 @use "./../styles/shared.scss" as *;
-@use './index.module.scss' as i;
+// @use './index.module.scss' as i;
 
 $soft_rose: rgb(238, 217, 215);
 
@@ -56,6 +56,33 @@ $soft_rose: rgb(238, 217, 215);
   }
 }
 
+/* CUSTOM SLIDES STYLES */
+.imageWrapper {
+  // Make background image take up height of content (sibling)
+  position: absolute;
+  top: 50%;
+  @include transform(translateY(-50%));
+  width: 100%;
+  height: auto;
+  z-index: -1;
+  &::before {
+    // Overlay for background image
+    content: "";
+    background-color: rgba($color: $black, $alpha: 0.55);
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+  }
+}
+.content {
+  max-width: $heroMaxWidth;
+  margin: auto;
+  padding: $su * 5 $su * 4;
+}
+/* END CUSTOM SLIDES STYLES */
+
 .form_row {
   .inner {
     max-width: $heroMaxWidth;
@@ -69,46 +96,10 @@ $soft_rose: rgb(238, 217, 215);
   }
 }
 
-.sliderContainer {
+.spacer {
+  /* Don't like the footer so close to me :) */
+  height: $su * 4;
   background-color: $white;
-  position: relative;
-  padding-bottom: $su * 4;
-  .imageWrapper {
-    // Make background image take up height of content (sibling)
-    position: absolute;
-    top: 50%;
-    @include transform(translateY(-50%));
-    width: 100%;
-    height: auto;
-    z-index: -1;
-    &::before {
-      // Overlay for background image
-      content: "";
-      background-color: rgba($color: $black, $alpha: 0.55);
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      position: absolute;
-      top: 0;
-    }
-  }
-  .content {
-    max-width: $heroMaxWidth;
-    margin: auto;
-    padding: $su * 5 $su * 4;
-  }
-}
-
-// Use features from row but position absolutely on slider
-.arrow_wrapper {
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  @include transform(translateY(-50%));
-  .inner {
-    // reference point for absolute positioned arrows as parent is already absolute positined
-    position: relative;
-  }
 }
 
 @media (max-width: 750px) {
@@ -182,25 +173,19 @@ $soft_rose: rgb(238, 217, 215);
     }
   }
 
-  .sliderContainer {
-    margin: 0;
-    padding-bottom: $su;
-    .content {
-      padding: $su * 2;
-      h2 {
-        margin-bottom: $su;
-      }
-      div {
-        & > p + p {
-          display: none;
-        }
+  .content {
+    padding: $su * 2;
+    h2 {
+      margin-bottom: $su;
+    }
+    div {
+      & > p + p {
+        display: none;
       }
     }
   }
 
   .spacer {
-    /* Don't like the footer so close to me :) */
-    height: $su * 4;
-    background-color: $white;
+    height: $su * 0;
   }
 }

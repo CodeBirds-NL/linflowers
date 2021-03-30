@@ -25,7 +25,12 @@ const AboutTemplate = ({ pageContext, data }) => {
       <div className={a.text} dangerouslySetInnerHTML={{ __html: text }} />
       <Button data={btn} />
       <h4 className={a.persons__title}>{persons_title}</h4>
-      <Persons persons={persons} customClass={a.persons} label={false} />
+      <Persons
+        persons={persons}
+        customClass={a.persons}
+        label={false}
+        showNumber={true}
+      />
       <div className={a.usps}>
         {usps.map(i => (
           <div key={i.titel} className={a.usp}>
@@ -76,6 +81,7 @@ export const data = graphql`
             image {
               ...Person
             }
+            title
           }
           usps {
             text

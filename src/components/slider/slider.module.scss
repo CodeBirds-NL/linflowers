@@ -1,4 +1,4 @@
-@use './../layout/layout.module.scss' as l;
+@use './../../styles/shared.scss' as *;
 
 .arrow {
   position: absolute;
@@ -15,8 +15,47 @@
     left: auto;
     right: -30px;
   }
+}
 
-  /* Contact page specific page */
+.sliderContainer {
+  background-color: $white;
+  position: relative;
+  padding-bottom: 0;
+  margin-bottom: 0;
+
+  ul.slides {
+    position: relative;
+    display: flex;
+    overflow-x: hidden;
+    width: 100%;
+    li {
+      color: $white;
+      font-size: 18px;
+      .image {
+        height: 100%;
+      }
+      a {
+        color: $red;
+        font-weight: 600;
+        font-size: 20px;
+      }
+      p {
+        max-width: 550px;
+      }
+    }
+  }
+}
+
+// Use features from row but position absolutely on slider
+.arrow_wrapper {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  @include transform(translateY(-50%));
+  .inner {
+    // reference point for absolute positioned arrows as parent is already absolute positined
+    position: relative;
+  }
 }
 
 @media (max-width: 550px) {

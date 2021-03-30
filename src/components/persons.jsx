@@ -23,7 +23,7 @@ const Persons = ({
             <div>
               <div>{title}</div>
               {role && <em>{func}</em>}
-              <div className={p.url}>{url}</div>
+              {url && <div className={p.url}>{url}</div>}
             </div>
           )}
         </a>

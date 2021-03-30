@@ -2,16 +2,14 @@
 
 .products {
   @include grid(3);
-  & > a:nth-child(3n + 2) {
-    margin-top: 40%;
-    margin-bottom: -40%;
-  }
+  row-gap: $su * 2;
   img {
     margin-bottom: 0;
   }
   .product {
     text-align: center;
     .caption {
+      margin-top: -10px;
       font-size: $su;
       text-transform: uppercase;
       color: $antra;
@@ -24,9 +22,5 @@
   .products {
     grid-template-columns: 1fr 1fr;
     gap: $su;
-    & > a:nth-child(3n + 2) {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
   }
 }
