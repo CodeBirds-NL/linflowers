@@ -12,6 +12,7 @@ import useKeyPress from "../components/utils/hooks/useKeyPress"
 import p from "./product.module.scss"
 import "keen-slider/keen-slider.min.css"
 import Spacer from "../components/spacer"
+import SEO from "../components/seo"
 
 const ProductTemplate = ({ pageContext, data }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -50,6 +51,7 @@ const ProductTemplate = ({ pageContext, data }) => {
 
   return (
     <Layout pageContext={pageContext}>
+      <SEO title={title} />
       <PageDefaultLayout
         breakOut={true}
         data={{ ...pageContext, title, image }}

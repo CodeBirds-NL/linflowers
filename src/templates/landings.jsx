@@ -16,6 +16,7 @@ const LandingsPage = ({ pageContext, data }) => {
   const {
     offerte_placeholder = "",
     proefbos_notice = "",
+    intro_text = "",
     landings_page,
   } = data.wordpressPage.acf
   const { image, special_field, form } = landings_page
@@ -37,6 +38,7 @@ const LandingsPage = ({ pageContext, data }) => {
 
   return (
     <PageDefaultLayout data={{ ...pageContext, title: form.title, image }}>
+      {intro_text && <div className={l.intro_text}>{intro_text}</div>}
       <div className={l.products}>
         {products.map(([title, label]) => (
           <div className={l.form_group} key={title}>
@@ -77,6 +79,7 @@ export const data = graphql`
       acf {
         offerte_placeholder
         proefbos_notice
+        intro_text
         landings_page {
           special_field
           image {

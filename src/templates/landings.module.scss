@@ -1,5 +1,8 @@
 @use './../styles/shared.scss' as *;
 
+.intro_text {
+  margin-bottom: $su * 2;
+}
 .products {
   @include grid(3, $su);
   margin-bottom: $su * 2;

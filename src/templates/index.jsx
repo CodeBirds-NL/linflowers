@@ -70,13 +70,18 @@ const IndexTemplate = ({ data, pageContext }) => {
         backgroundImage={acf.home.hero.background_image}
       >
         <div className={i.hero_inner}>
-          <button id={i.watch_video}>
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href={acf.home.hero.cta_link}
+            id={i.watch_video}
+          >
             <Img
               style={{ marginRight: "0.6rem" }}
               fixed={acf.home.hero.cta_icon.localFile.childImageSharp.fixed}
             />
             {acf.home.hero.cta}
-          </button>
+          </a>
           <Actions actions={acf.home.hero.actions} />
         </div>
       </Row>
@@ -165,6 +170,7 @@ export const data = graphql`
               }
             }
             cta
+            cta_link
             cta_icon {
               alt_text
               localFile {
