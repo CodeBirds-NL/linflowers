@@ -198,6 +198,25 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  const bedanktResult = await graphql(`
+    {
+      allWordpressPage(filter: { template: { eq: "thanks.php" } }) {
+        edges {
+          node {
+            wordpress_id
+            slug
+            lang_code
+            template
+            polylang_translations {
+              slug
+              lang_code
+            }
+          }
+        }
+      }
+    }
+  `)
+
   const allQueryResults = [
     indexResult,
     aboutResult,
@@ -207,6 +226,7 @@ exports.createPages = async ({ graphql, actions }) => {
     productResult,
     landingsResult,
     postsResult,
+    bedanktResult,
   ]
 
   // Check for any errors

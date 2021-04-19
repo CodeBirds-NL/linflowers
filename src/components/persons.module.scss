@@ -2,7 +2,7 @@
 
 .persons {
   @include grid(3);
-  max-width: $heroMaxWidth;
+  max-width: $iconsMaxWidth;
   &.home {
     margin: auto;
     margin-top: -42px;

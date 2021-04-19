@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react"
-import { Link } from "gatsby"
+import { navigate } from "gatsby"
 
 import f from "./form.module.scss"
 import l from "./../components/layout/layout.module.scss"
@@ -9,6 +9,7 @@ const Form = ({
   label,
   label_active,
   confirmation,
+  submit_url,
   privacy_notice,
   productValues = "",
   resetHandler = "",
@@ -66,20 +67,24 @@ const Form = ({
       .then(data => {
         //Handle your data
         if (data === "success") {
-          // reset state container entries and form itself
-          formRef.current.reset()
-          saveFormEntries({})
-          // Resets offerte/proefbos inputs
-          resetHandler && resetHandler()
+          if (submit_url) {
+            navigate(submit_url)
+          } else {
+            // reset state container entries and form itself
+            formRef.current.reset()
+            saveFormEntries({})
+            // Resets offerte/proefbos inputs
+            resetHandler && resetHandler()
 
-          setFormIsProcessing(false)
-          setFormSent(true)
+            setFormIsProcessing(false)
+            setFormSent(true)
 
-          // remove success message after 5 seconds
-          let timeout = setTimeout(() => {
-            setFormSent(false)
-            clearTimeout(timeout)
-          }, 5000)
+            // remove success message after 5 seconds
+            let timeout = setTimeout(() => {
+              setFormSent(false)
+              clearTimeout(timeout)
+            }, 5000)
+          }
         }
       })
   }

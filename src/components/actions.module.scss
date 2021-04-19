@@ -1,13 +1,14 @@
 @use './../styles/shared.scss' as *;
 
-$actionCircleWidth: 120px;
+$actionCircleWidth: 100px;
 
 /* -----------------
   ACTIONS
   -------------------- */
 .actions {
   @include grid(3);
-
+  width: $iconsMaxWidth;
+  margin: auto;
   .action {
     text-align: center;
     color: $red;

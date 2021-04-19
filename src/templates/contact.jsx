@@ -144,6 +144,7 @@ export const data = graphql`
             }
             privacy_notice
             confirmation
+            submit_url
           }
           locations {
             title

@@ -13,6 +13,7 @@ import p from "./product.module.scss"
 import "keen-slider/keen-slider.min.css"
 import Spacer from "../components/spacer"
 import SEO from "../components/seo"
+import Button from "../components/button"
 
 const ProductTemplate = ({ pageContext, data }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -50,63 +51,56 @@ const ProductTemplate = ({ pageContext, data }) => {
   pageContext["parentSlugTranslations"] = parentSlugs
 
   return (
-    <Layout pageContext={pageContext}>
-      <SEO title={title} />
-      <PageDefaultLayout
-        breakOut={true}
-        data={{ ...pageContext, title, image }}
-      >
-        <div className={p.grid}>
-          <div className={p.gallery}>
-            <div className={p.slider} ref={sliderRef}>
-              {gallery.map((slide, index) => (
-                <div
-                  key={index}
-                  className={`keen-slider__slide number-slide${index}`}
-                >
-                  <Img
-                    className={p.image}
-                    fluid={slide.localFile.childImageSharp.fluid}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className={p.track}>
-              {gallery.map((slide, index) => (
-                <div
-                  key={`track` + index}
-                  onClick={() => {
-                    slider.moveToSlideRelative(index)
-                  }}
-                  className={[
-                    p.container,
-                    currentSlide === index && p.active,
-                  ].join(" ")}
-                >
-                  <Img
-                    className={p.image}
-                    fluid={slide.localFile.childImageSharp.fluid}
-                  />
-                </div>
-              ))}
-            </div>
+    <PageDefaultLayout data={{ ...pageContext, title, image }}>
+      <div className={p.grid}>
+        <div className={p.gallery}>
+          <div className={p.slider} ref={sliderRef}>
+            {gallery.map((slide, index) => (
+              <div
+                key={index}
+                className={`keen-slider__slide number-slide${index}`}
+              >
+                <Img
+                  className={p.image}
+                  fluid={slide.localFile.childImageSharp.fluid}
+                />
+              </div>
+            ))}
           </div>
-          <div className={p.content}>
-            <div className={p.name}>{name}</div>
-            <div
-              className={p.html}
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
+          <div className={p.track}>
+            {gallery.map((slide, index) => (
+              <div
+                key={`track` + index}
+                onClick={() => {
+                  slider.moveToSlideRelative(index)
+                }}
+                className={[
+                  p.container,
+                  currentSlide === index && p.active,
+                ].join(" ")}
+              >
+                <Img
+                  className={p.image}
+                  fluid={slide.localFile.childImageSharp.fluid}
+                />
+              </div>
+            ))}
           </div>
         </div>
-      </PageDefaultLayout>
-      <Row backgroundColor="antra">
-        <div className={p.actions_section}>
-          <Actions color="white" actions={actions} />
+        <div className={p.content}>
+          <div className={p.name}>{name}</div>
+          <div
+            className={p.html}
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+          <div className={p.actions}>
+            {actions.map(a => (
+              <Button data={{ link: a.url, label: a.title }} color="red" />
+            ))}
+          </div>
         </div>
-      </Row>
-      <Spacer />
-    </Layout>
+      </div>
+    </PageDefaultLayout>
   )
 }
 

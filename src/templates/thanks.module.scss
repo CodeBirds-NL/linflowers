@@ -1,0 +1,45 @@
+@use './../styles/shared.scss' as *;
+@use './../components/layout/page_default_layout.module.scss' as p;
+
+.hero {
+  min-height: calc(100vh - 240px);
+}
+
+.contentWrapper {
+  background: transparent;
+  width: $heroMaxWidth;
+  margin: auto;
+  padding: 0;
+  padding-top: 10%;
+  .inner {
+    padding: $su $su * 2;
+    background: rgba($color: $white, $alpha: 0.5);
+    @include border-radius($block-b-r);
+    width: 400px;
+  }
+}
+
+.spacer {
+  height: $su * 3;
+  background: $white;
+}
+
+@media (max-width: 550px) {
+  .hero {
+    min-height: calc(100vh - 135px);
+    margin-bottom: -20px;
+  }
+  .contentWrapper {
+    padding: 0;
+    margin: 0;
+    // margin-bottom: -400px;
+    width: unset;
+    .inner {
+      padding: $su;
+      width: 100%;
+    }
+  }
+  .spacer {
+    display: none;
+  }
+}

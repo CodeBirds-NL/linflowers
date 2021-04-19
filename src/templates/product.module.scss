@@ -57,12 +57,10 @@ CONTENT (right column) STYLES
 }
 
 /* --------------- 
-CTA BANNER
+CTA's
 ------------------ */
-.actions_section {
-  max-width: $heroMaxWidth;
-  margin: auto;
-  padding: $su * 2 0;
+.actions {
+  @include grid(1, $su * 0.5);
 }
 
 @media (max-width: 550px) {
