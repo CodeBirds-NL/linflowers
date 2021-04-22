@@ -41,8 +41,9 @@ $actionCircleWidth: 100px;
 }
 
 @media (max-width: 550px) {
-  $actionCircleWidth: 80px !global;
+  $actionCircleWidth: 70px !global;
   .actions {
+    width: auto;
     .action {
       font-size: 17px;
       .text {

@@ -76,10 +76,10 @@ const IndexTemplate = ({ data, pageContext }) => {
             href={acf.home.hero.cta_link}
             id={i.watch_video}
           >
-            {/* <Img
+            <Img
               style={{ marginRight: "0.6rem" }}
               fixed={acf.home.hero.cta_icon.localFile.childImageSharp.fixed}
-            /> */}
+            />
             {acf.home.hero.cta}
           </a>
           <Actions actions={acf.home.hero.actions} />

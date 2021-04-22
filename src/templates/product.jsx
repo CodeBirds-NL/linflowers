@@ -95,7 +95,11 @@ const ProductTemplate = ({ pageContext, data }) => {
           />
           <div className={p.actions}>
             {actions.map(a => (
-              <Button data={{ link: a.url, label: a.title }} color="red" />
+              <Button
+                key={a.title}
+                data={{ link: a.url, label: a.title }}
+                color="red"
+              />
             ))}
           </div>
         </div>
