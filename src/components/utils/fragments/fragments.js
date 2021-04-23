@@ -7,8 +7,8 @@ export const Person = graphql`
     id
     localFile {
       childImageSharp {
-        fixed(width: 86) {
-          ...GatsbyImageSharpFixed_withWebp
+        fixed(width: 86, quality: 100) {
+          ...GatsbyImageSharpFixed
         }
       }
     }
@@ -20,7 +20,7 @@ export const Background = graphql`
     alt_text
     localFile {
       childImageSharp {
-        fluid(maxWidth: 1500) {
+        fluid(maxWidth: 1800, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
@@ -46,7 +46,7 @@ export const Action = graphql`
     alt_text
     localFile {
       childImageSharp {
-        fluid(maxWidth: 600) {
+        fluid(maxWidth: 600, quality: 100) {
           ...GatsbyImageSharpFluid
         }
       }
