@@ -9,13 +9,14 @@ import a from "./assortiment.module.scss"
 const FlowersArchiveTemplate = ({ pageContext, data }) => {
   const { acf } = pageContext
   const { edges: products } = data.allWordpressWpProducts
+  const filteredProducts = products.sort((a,b) => new Date(b.node.date) - new Date(a.node.date))
 
   return (
     <PageDefaultLayout
       data={{ ...pageContext, title: acf.products_archive.title }}
     >
       <div className={a.products}>
-        {products.map(
+        {filteredProducts.map(
           ({ node }) =>
             node.acf.product.thumbnail && (
               <Link key={node.slug} to={node.slug} className={a.product}>
@@ -47,6 +48,7 @@ export const data = graphql`
       edges {
         node {
           slug
+          date
           acf {
             product {
               title
