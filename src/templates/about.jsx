@@ -21,7 +21,7 @@ const AboutTemplate = ({ pageContext, data }) => {
   } = data.wordpressPage.acf.about
 
   return (
-    <PageDefaultLayout data={{ ...pageContext, title, image }}>
+    <PageDefaultLayout data={{ ...pageContext, title, image, yoast_head_json: data.wordpressPage.yoast_head_json }}>
       <div className={a.text} dangerouslySetInnerHTML={{ __html: text }} />
       <Button data={btn} />
       <h4 className={a.persons__title}>{persons_title}</h4>
@@ -64,6 +64,7 @@ export default AboutTemplate
 export const data = graphql`
   query AboutPageQuery($wordpress_id: Int) {
     wordpressPage(wordpress_id: { eq: $wordpress_id }) {
+      ...SEOData
       acf {
         about {
           title

@@ -9,7 +9,8 @@ import SEO from "../seo"
 const PageDefaultLayout = ({ data, children, breakOut = false }) => {
   return !breakOut ? (
     <Layout pageContext={data}>
-      <SEO title={data.title} />
+      <SEO meta={ data.yoast_head_json} lang={data.lang_code }
+      />
       <Row
         customClass={a.hero}
         backgroundImage={data.featured_media || data.image}
