@@ -10,6 +10,7 @@ import Form from "../components/form"
 import Slider from "../components/slider/slider"
 
 import c from "./contact.module.scss"
+import SEO from "../components/seo"
 
 const ContactTemplate = ({ pageContext, data }) => {
   const {
@@ -20,10 +21,11 @@ const ContactTemplate = ({ pageContext, data }) => {
     form,
     locations,
   } = data.wordpressPage.acf.contact
-  const { featured_media } = data.wordpressPage
+  const { featured_media, yoast_head_json } = data.wordpressPage
 
   return (
     <Layout pageContext={pageContext}>
+      <SEO meta={ yoast_head_json} lang={ pageContext.lang_code} />
       <PageDefaultLayout
         breakOut={true}
         data={{ ...pageContext, title, featured_media }}
@@ -107,6 +109,7 @@ export const data = graphql`
       featured_media {
         ...Background
       }
+      ...SEOData
       acf {
         contact {
           title

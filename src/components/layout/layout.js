@@ -1,10 +1,3 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
@@ -13,6 +6,7 @@ import Header from "../header/header"
 import "./layout.css"
 import l from "./layout.module.scss"
 import Footer from "../footer/footer"
+import { getPageFromLangCode } from "../utils/functions"
 
 const Layout = ({ children, pageContext }) => {
   const data = useStaticQuery(graphql`
@@ -32,7 +26,7 @@ const Layout = ({ children, pageContext }) => {
       wordpressSiteMetadata {
         url
       }
-      allWordpressPage(filter: { template: { eq: "footer.php" } }) {
+      footerData: allWordpressPage(filter: { template: { eq: "footer.php" } }) {
         edges {
           node {
             lang_code
@@ -54,52 +48,10 @@ const Layout = ({ children, pageContext }) => {
           }
         }
       }
-      wordpressPage(slug: { eq: "header" }) {
-        acf {
-          header_footer {
-            site_description
-            site_title
-            site_logo {
-              alt_text
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 800) {
-                    ...GatsbyImageSharpFluid_noBase64
-                  }
-                }
-              }
-            }
-            topbar {
-              tel
-              tel_icon {
-                alt_text
-                localFile {
-                  childImageSharp {
-                    fixed(width: 24) {
-                      ...GatsbyImageSharpFixed_noBase64
-                    }
-                  }
-                }
-              }
-              email
-              email_icon {
-                alt_text
-                localFile {
-                  childImageSharp {
-                    fixed(width: 24) {
-                      ...GatsbyImageSharpFixed_noBase64
-                    }
-                  }
-                }
-              }
-            }
-            languages {
-              label
-              icon {
-                ...Pijler
-              }
-              lang_code
-            }
+      headerData: allWordpressPage(filter: { template: { eq: "header_footer.php" } }) {
+        edges {
+          node {
+            ...HeaderQueries
           }
         }
       }
@@ -130,12 +82,8 @@ const Layout = ({ children, pageContext }) => {
     return menu
   })
 
-  /**
-   * Get language based footer content
-   */
-  const footerData = data.allWordpressPage.edges.find(
-    ({ node }) => node.lang_code === langCode
-  ).node
+  const footerData = getPageFromLangCode(data.footerData, langCode)
+  const headerData = getPageFromLangCode(data.headerData, langCode)
 
   /**
    * Pass object with lang_codes mapped to their slugs to header
@@ -158,7 +106,7 @@ const Layout = ({ children, pageContext }) => {
       <Header
         langCode={langCode}
         menuItems={menus}
-        metaData={data.wordpressPage.acf.header_footer}
+        metaData={{ ...headerData.acf.header_footer }}
         langSlugMappings={langsToSlugs}
         indexPage={pageContext.indexPage || false}
       />
@@ -167,7 +115,7 @@ const Layout = ({ children, pageContext }) => {
         langCode={langCode}
         menuItems={menus}
         data={{ ...footerData.acf.footer }}
-        logo={data.wordpressPage.acf.header_footer.site_logo}
+        logo={headerData.acf.header_footer.site_logo}
       />
     </>
   )

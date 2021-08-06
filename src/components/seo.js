@@ -1,31 +1,29 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
-import PropTypes from "prop-types"
+import { string, shape, object, arrayOf } from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import { getPageFromLangCode } from "./utils/functions"
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
+function SEO({ meta, lang }) {
+  const query = useStaticQuery(
     graphql`
       query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
+        headerData: allWordpressPage(filter: { template: { eq: "header_footer.php" } }) {
+          edges {
+            node {
+              ...HeaderQueries
+            }
           }
         }
       }
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
+  const headerData = getPageFromLangCode(query.headerData, lang)
+  const { og_title: title, og_description: description, og_type: type, og_url: url, og_image: image } = meta
+
+  const metaDescription = description || headerData.acf.header_footer.site_description
+  const metaImage = image[0].localFile ? image[0].localFile.childImageSharp.fixed : null
 
   return (
     <Helmet
@@ -33,7 +31,7 @@ function SEO({ description, lang, meta, title }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={title}
       meta={[
         {
           name: `description`,
@@ -44,20 +42,16 @@ function SEO({ description, lang, meta, title }) {
           content: title,
         },
         {
+          property: `og:url`,
+          content: url
+        },
+        {
           property: `og:description`,
           content: metaDescription,
         },
         {
           property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: type,
         },
         {
           name: `twitter:title`,
@@ -66,23 +60,59 @@ function SEO({ description, lang, meta, title }) {
         {
           name: `twitter:description`,
           content: metaDescription,
-        },
-      ].concat(meta)}
+        }].concat(metaImage ? [
+          {
+            property: `og:image`,
+            content: metaImage.src
+          },
+          {
+            property: `og:image:alt`,
+            content: image[0].alt_text,
+          },
+          {
+            property: 'og:image:width',
+            content: metaImage.width
+          },
+          {
+            property: 'og:image:height',
+            content: metaImage.height
+          },
+          {
+            name: `twitter:card`,
+            content: `summary_large_image`,
+          }] : [
+          {
+            name: `twitter:card`,
+            content: `summary`,
+          },
+        ])}
     />
   )
 }
 
 SEO.defaultProps = {
   lang: `en`,
-  meta: [],
-  description: ``,
+  meta: {
+    og_title: "Linflowers",
+    og_image: [{
+      alt_text: 'Linflowers',
+      localFile: null
+    }]
+  }
 }
 
 SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
+  lang: string,
+  meta: shape({
+    og_title: string.isRequired,
+    og_description: string,
+    og_type: string,
+    og_url: string,
+    og_image: arrayOf(shape({
+      alt_text: string.isRequired,
+      localFile: object
+    }))
+  })
 }
 
 export default SEO

@@ -61,6 +61,9 @@ typings/
 public
 package-lock.json
 
+# webstorm
+.idea/
+
 # Mac files
 .DS_Store
 

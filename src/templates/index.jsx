@@ -27,8 +27,7 @@ const getBrowserLang = () => {
 }
 
 const IndexTemplate = ({ data, pageContext }) => {
-  const { acf } = data.wordpressPage
-
+  const { acf, yoast_head_json } = data.wordpressPage
   // useEffect(() => {
   //   // Get browser language
   //   const lang = getBrowserLang()
@@ -61,10 +60,9 @@ const IndexTemplate = ({ data, pageContext }) => {
   /* We want custom behavior when language switching on home, 
   so we add an extra property to pageContext to notify the header component */
   pageContext.indexPage = true
-
   return (
     <Layout pageContext={pageContext}>
-      <SEO title={acf.home.title} />
+      <SEO meta={yoast_head_json} lang={ pageContext.lang_code} />
       <Row
         customClass={i.hero}
         backgroundImage={acf.home.hero.background_image}
@@ -155,6 +153,7 @@ export default IndexTemplate
 export const data = graphql`
   query IndexPageQuery($wordpress_id: Int) {
     wordpressPage(wordpress_id: { eq: $wordpress_id }) {
+      ...SEOData
       acf {
         home {
           title
