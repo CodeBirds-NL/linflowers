@@ -1,0 +1,34 @@
+name: deploy-gatsby-site
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy Gatsby site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code in ${{ github.ref_name }}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+      - name: Install project dependencies
+        run: npm install
+      - name: Install Gatsby CLI
+        run: npm install -g gatsby-cli@2.19.3
+      - name: Build
+        run: npm run build
+      - name: Verify build
+        run: ls -la public
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref_name == 'master' }}
+        with:
+          github_token: ${{ github.token }}
+          publish_dir: "./public"
+          cname: linflowers.com

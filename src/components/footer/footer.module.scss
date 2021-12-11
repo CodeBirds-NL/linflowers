@@ -25,18 +25,21 @@
       color: $white;
       font-size: 18px;
       font-weight: 600;
+      flex-wrap: wrap;
       li {
         margin-right: $su * 0.5;
-        padding-right: $su * 0.5;
+        padding-right: $su * 0.75;
         position: relative;
         &::after {
           content: "";
           position: absolute;
           right: 0;
-          top: 0;
-          width: 3px;
+          top: calc(1.45em / 2);
+          width: 5px;
           background-color: $white;
-          height: 100%;
+          height: 5px;
+          @include border-radius(50%);
+          display: block;
         }
 
         /* Last menu item shouldn't have a stick to it's right :-) */
@@ -50,7 +53,7 @@
   .col_title {
     font-size: 32px;
     font-weight: 600;
-    margin-bottom: $su * 0.5;
+    margin-bottom: $su * 0.75;
   }
   .col_2,
   .col_3 {
