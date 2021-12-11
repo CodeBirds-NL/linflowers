@@ -123,6 +123,16 @@ NOTICE
   }
 }
 
+/* -------------
+404
+---------------- */
+.not_found_section {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 // iphone 5 styles
 @media (max-width: 330px) {
   .wrapper {

@@ -93,54 +93,54 @@ export const SEOData = graphql`
 `
 
 export const HeaderQueries = graphql`
-fragment HeaderQueries on wordpress__PAGE {
-  lang_code
-  acf {
-    header_footer {
-      site_description
-      site_title
-      site_logo {
-        alt_text
-        localFile {
-          childImageSharp {
-            fluid(maxWidth: 800) {
-              ...GatsbyImageSharpFluid_noBase64
-            }
-          }
-        }
-      }
-      topbar {
-        tel
-        tel_icon {
+  fragment HeaderQueries on wordpress__PAGE {
+    lang_code
+    acf {
+      header_footer {
+        site_description
+        site_title
+        site_logo {
           alt_text
           localFile {
             childImageSharp {
-              fixed(width: 24) {
-                ...GatsbyImageSharpFixed_noBase64
+              fluid(maxWidth: 800) {
+                ...GatsbyImageSharpFluid_noBase64
               }
             }
           }
         }
-        email
-        email_icon {
-          alt_text
-          localFile {
-            childImageSharp {
-              fixed(width: 24) {
-                ...GatsbyImageSharpFixed_noBase64
+        topbar {
+          tel
+          tel_icon {
+            alt_text
+            localFile {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+          email
+          email_icon {
+            alt_text
+            localFile {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
               }
             }
           }
         }
-      }
-      languages {
-        label
-        icon {
-          ...Pijler
+        languages {
+          label
+          icon {
+            ...Pijler
+          }
+          lang_code
         }
-        lang_code
       }
     }
   }
-}
 `

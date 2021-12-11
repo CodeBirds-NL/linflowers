@@ -5,6 +5,10 @@ import Row from "../row"
 
 import h from "./header.module.scss"
 
+const iconStyle = {
+  width: 24,
+}
+
 const TopBar = ({ data }) => {
   const { tel_icon, tel, email_icon, email } = data
   return (
@@ -12,11 +16,17 @@ const TopBar = ({ data }) => {
       <div className={[h.topbar].join(" ")}>
         <div className={h.contactInfo}>
           <a href={`tel:${tel}`} className={h.tel}>
-            <Img fixed={tel_icon.localFile.childImageSharp.fixed} />
+            <Img
+              style={iconStyle}
+              fluid={tel_icon.localFile.childImageSharp.fluid}
+            />
             <span>{tel}</span>
           </a>
           <a href={`mailto:${email}`} className={h.email}>
-            <Img fixed={email_icon.localFile.childImageSharp.fixed} />
+            <Img
+              style={iconStyle}
+              fluid={email_icon.localFile.childImageSharp.fluid}
+            />
             <span>{email}</span>
           </a>
         </div>

@@ -62,7 +62,7 @@ const IndexTemplate = ({ data, pageContext }) => {
   pageContext.indexPage = true
   return (
     <Layout pageContext={pageContext}>
-      <SEO meta={yoast_head_json} lang={ pageContext.lang_code} />
+      <SEO meta={yoast_head_json} lang={pageContext.lang_code} />
       <Row
         customClass={i.hero}
         backgroundImage={acf.home.hero.background_image}
@@ -75,8 +75,9 @@ const IndexTemplate = ({ data, pageContext }) => {
             id={i.watch_video}
           >
             <Img
-              style={{ marginRight: "0.6rem" }}
-              fixed={acf.home.hero.cta_icon.localFile.childImageSharp.fixed}
+              style={{ marginRight: "0.6rem", width: 35 }}
+              fluid={acf.home.hero.cta_icon.localFile.childImageSharp.fluid}
+              durationFadeIn={0}
             />
             {acf.home.hero.cta}
           </a>
@@ -174,8 +175,8 @@ export const data = graphql`
               alt_text
               localFile {
                 childImageSharp {
-                  fixed(width: 36) {
-                    ...GatsbyImageSharpFixed_withWebp
+                  fluid {
+                    ...GatsbyImageSharpFluid
                   }
                 }
               }
